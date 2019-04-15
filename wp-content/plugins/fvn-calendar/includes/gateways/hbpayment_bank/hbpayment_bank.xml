@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  	  <fieldset name="basic">
+  	  <field name="enabled" type="radio" default="1" label="Enable" description="Enable Pay by Cash">
+  	  	<option value="1">Yes</option>
+		<option value="0">No</option>
+  	  </field>
+  	  <field name="display_name" type="text" required="required" default="" label="Display Name" description="Name appears at payment page of frontend"/>
+		 <field name="user_role" type="user_role" default="publish" label="Access permission"  description="Group of user can see the gateway"/>
+		 <field name="order_status" type="list" default="CONFIRMED" label="Order status"  description="Order status of booking after use this payment method">
+		 	<option value="PENDING">PENDING</option>
+		 	<option value="CONFIRMED">CONFIRMED</option>
+		 </field>
+		  <field name="pay_status" type="list" default="PENDING" label="Pay status"  description="Pay status of booking after use this payment method">
+		 	<option value="PENDING">PENDING</option>
+		 	<option value="SUCCESS">SUCCESS</option>
+		 </field>
+		<field name="description" type="textarea" default="" label="Description" description="The message will display when select the payment method"/>
+				
+		</fieldset>
+</config>

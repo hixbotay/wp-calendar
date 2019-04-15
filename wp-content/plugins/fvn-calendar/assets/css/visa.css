@@ -1,0 +1,309 @@
+@CHARSET "ISO-8859-1";
+.input-mini{
+	width:60px;
+}
+/* booking form */
+.tab-step {
+    border-bottom: 3px solid #BB0200;
+	margin: 0 0 30px;
+}
+.tab-step h1.note {
+    float: left;
+    font-family: "Oswald";
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0px;
+	padding-bottom: 10px;
+}
+ul.style-step {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+    float: right;
+    vertical-align: baseline;
+}
+ul.style-step li {
+	background-color: #F2F3F3;
+	color: #A2A2A2;
+	display: inline;
+	float: left;
+	font-weight: bold;
+	margin-left: 2px;
+	padding: 4px 15px;
+}
+ul.style-step li font.number {
+    font-size: 20px;
+}
+ul.style-step li.active {
+    background: none repeat scroll 0 0 #BB0200;
+    color: #FFFFFF;
+}
+.applyform input[type="text"].error, input.error, select.error {
+    border: 1px solid #DF1F26 !important;
+}
+.applyform div.error {
+    border: 1px dotted #DF1F26;
+}
+.rush-info {
+	background-color: #fcf8e3;
+	border-color: #faebcc;
+}
+.rush-info a {
+	color: #D40000;
+}
+.applyform input[type="text"] {
+}
+.applyform select {
+}
+.applyform textarea {
+}
+
+.processing-note {
+	background-color: #ECEFF1;
+	margin-top: 12px;
+	padding: 15px;
+	font-size: 12px;
+	position: relative;
+}
+
+.processing-note.note-success {
+	background-color: #dff0d8;
+}
+
+.processing-note:before {
+	position: absolute;
+	display: block;
+	top: -12px;
+	left: 20px;
+	content: " ";
+	box-sizing: border-box;
+	z-index: 2;
+	border-color: transparent transparent rgb(236, 239, 241);
+	border-style: solid;
+	border-width: 6px;
+}
+
+.processing-note.note-success:before {
+	border-color: transparent transparent rgb(223, 240, 216);
+}
+
+.panel-options {
+}
+
+.panel-options .div {
+	padding-top: 15px;
+	width: 100%;
+	height: 1px;
+	border-top: 1px solid #CCC;
+	display: block;
+}
+
+.panel-fees {
+	background-color: #FFFFFF;
+    padding: 0px;
+    border: 1px solid #DDDDDD;
+    position: relative;
+}
+.panel-fees ul {
+	list-style: none;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+}
+.panel-fees li {
+    border-bottom: 1px solid #BDC6CA;
+    padding: 10px;
+}
+.panel-fees .last {
+    border-bottom: 1px solid #6997B3;
+}
+.panel-fees span, .panel-fees table.extra_service {
+    float: right;
+}
+.panel-fees table.extra_service td {
+    padding: 0px 0px 10px 0px;
+}
+.panel-fees .total {
+	border: none;
+	margin-top: -1px;
+    border-top: 1px solid #6997B3;
+}
+.panel-fees .price {
+    color: #005286;
+    font-weight: bold;
+}
+.panel-fees label span {
+    float: none !important;
+}
+.panel-fees .passport_holder_t {
+	color: #005286;
+	font-weight: bold;
+}
+.panel-fees .yoursavepercent_t {
+    float: none;
+    color: #005286;
+    font-weight: bold;
+}
+.panel-fees .vipsavepercent_t {
+    float: none;
+    color: #005286;
+    font-weight: bold;
+}
+.panel-fees .total span {
+    color: #DC2222;
+    font-size: 16px;
+    font-weight: bold;
+}
+.panel-fees .payment-methods {
+	background-color: #ECEFF1;
+	text-align: center;
+	padding: 12px 20px;
+	margin-top: 10px;
+}
+.promotion-input {
+}
+.applyform.step2 .group {
+}
+.applyform.step2 .group h2 {
+	background-color: #CFD8DC;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 12px 15px;
+}
+.applyform.step2 .group .group-content .form-control {
+	padding: 4px;
+	font-size: 12px;
+}
+.applyform.step2 .group .group-content {
+	background-color: #F8F8F8;
+	padding: 15px;
+	margin-bottom: 15px;
+}
+.applyform.step2 .group .group-content .passport-detail {
+	margin-left: -2px;
+	margin-right: -2px;
+}
+.applyform.step2 .group .group-content .passport-detail *[class*="col-"] {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+.applyform.step2 .group .group-content .passport-detail *[class*="col-"] .row {
+	margin-left: -2px;
+	margin-right: -2px;
+}
+.applyform.step2 .group .group-content .passport-detail .form-control {
+	margin-bottom: 15px;
+}
+.terms_conditions_confirm {
+	text-decoration: underline;
+}
+
+.applyform.step3 .table-summary {
+    border-collapse: collapse;
+    margin: 0 0 18px 0;
+}
+.applyform.step3 h3 {
+}
+.applyform.step3 .table-summary th,
+.applyform.step3 .table-summary td {
+    padding: 7px 10px;
+    border: 1px solid #CFD8DC;
+}
+.applyform.step3 .table-summary th {
+    background: #CFD8DC;
+}
+.applyform.step3 .table-summary td {
+    font-weight: normal;
+}
+.applyform.step3 .table-summary .total {
+	font-weight: bold;
+    color: red;
+}
+
+.applymore15 {
+    padding: 20px 0px 0px;
+}
+.applymore15 p {
+    line-height: 10px;
+}
+.applymore15 a {
+    text-decoration: underline;
+}
+.applymore15 .here {
+    text-decoration: underline;
+}
+.processing-option.none{
+	display:none;
+}
+/*--end booking form */
+
+/*pop up*/
+
+.fvn-button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.fvn-button:hover {
+  background: #06D85F;
+}
+
+.fvn-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+}
+.fvn-overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.fvn-popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.fvn-popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.fvn-popup .fvn-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.fvn-popup .fvn-close:hover {
+  color: #06D85F;
+}
+.fvn-popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  
+  .fvn-popup{
+    width: 70%;
+  }
+}
+/*end pop up*/

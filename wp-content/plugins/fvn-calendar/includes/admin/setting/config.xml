@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>	
+	<fieldset name="MainSettings" label="Main Settings">					
+		<field name="main_currency" type="text" label="Main Currency" default="USD" />
+		<field name="currency_symbol" type="text" label="Currency symbol" default="$"/>
+		<field name="passenger_limit" type="number" label="Passenger limit" default="15"/>
+ 		<field name="extra_service_notice" type="note" label="Extra service"/>
+		<field name="private_later" type="number" label="Private later price" default="0"/>
+		<field name="airport_fast_track" type="number" label="Airport fast track price" default="0"/>
+		
+		<field type="radio" name="formatHours" default="12" label="Time format" class="btn-group">
+				<option value="12">12</option>
+				<option value="24">24</option>
+		</field>			
+		<field type="text" name="date_format_type_long" default="l d F Y" label="Date format Long" description="Long format of date, it is used in some view that need to show specific date for customer" class="btn-group" />
+		<field type="list" name="date_format_short" default="Y-m-d" label="Date format Short" description="Date format of the system" class="btn-group">
+			<option value="Y-m-d">Y-m-d</option>
+			<option value="d-m-Y">d-m-Y</option>
+			<option value="m-d-Y">m-d-Y</option>
+		</field>				
+	</fieldset>
+	
+	<fieldset name="Display" label="Display">
+		<field type="radio" name="load_bootstrap_css" default="1" label="Load bootstrap css" description="Turn off bootstrap to avoid confic template" class="btn-group">
+				<option value="0">OFF</option>
+				<option value="1">ON</option>
+		</field>
+		<field type="radio" name="load_bootstrap_js" default="1" label="Load bootstrap javascript" description="Turn off bootstrap to avoid confic template" class="btn-group">
+				<option value="0">OFF</option>
+				<option value="1">ON</option>
+		</field>
+		<field type="list" name="currency_display" label="Display money"
+			default="0">
+			<option value="0">5$</option>
+			<option value="1">5 $</option>
+			<option value="2">$5</option>
+			<option value="3">$ 5</option>
+		</field>		
+		<field name="currency_seperator" type="text" label="Currency seperator"/>		
+		<field name="currency_decimalpoint" type="text" label="Decimal point" default="2"/>		
+		<field type="note" label="Pages" />
+		<field name="register_trial"  type="page"  label="Trial Register page" description="Register to register trail"/>
+		<field name="register"  type="page"  label="Register page" description="Register to register new order"/>		
+		<field name="term_content_id"  type="page"  label="Term and condition document"/>		
+		<field name="page_login"  type="page"  label="Login page"/>
+		<field name="page_register"  type="page"  label="Sign in page"/>
+		
+	</fieldset>
+	
+	<fieldset name="Invoice" label="Company">	
+		<field name="company_name" type="text" label="Company name" />
+		<field name="company_email" type="text" label="Company Email" />
+		<field name="company_address" type="text" label="Company address" />
+		<field name="company_phone" type="text" label="Phone" default="support team"/>		
+		<field name="invoice_header" type="textarea" rows="8"  label="Invoice header" description="Header of invoice" />
+		<field name="invoice_footer" type="textarea" rows="8" label="Invoice footer" description="Footer of invoice" />
+	</fieldset>
+		
+</config>

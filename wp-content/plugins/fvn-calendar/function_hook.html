@@ -1,0 +1,40 @@
+
+<table>
+	<tr>
+		<th>Function</th>
+		<td>Description</td>
+		<td>Section</td>
+	</tr>
+	<tr>
+		<th colspan="3">Process booking</th>
+	</tr>
+	<tr>
+		<th>jbroute_order_after_created</th>
+		<td>Process order after the order is created in the system</td>
+		<td>includes/functions/class-route.php</td>
+	</tr>
+	<tr>
+		<th colspan="3">Payment</th>
+	</tr>
+	<tr>
+		<th>jbroute_order_process_checkout</th>
+		<td>Process order before checkout</td>
+		<td>includes/functions/class-payment.php</td>
+	</tr>
+	<tr>
+		<th>jbroute_order_process_execute_before</th>
+		<td>
+			Process order when gateway return, it can be notify, success return. The function is done before payment plugin 
+			process
+		</td>
+		<td>includes/functions/class-payment.php</td>
+	</tr>
+	<tr>
+		<th>jbroute_order_process_execute_after</th>
+		<td>
+			Process order when gateway return, it can be notify, success return. The function is done after payment plugin 
+			process
+		</td>
+		<td>includes/functions/class-payment.php</td>
+	</tr>
+</table>

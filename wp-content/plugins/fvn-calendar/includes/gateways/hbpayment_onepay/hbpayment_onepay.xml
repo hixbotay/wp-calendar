@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  	  <fieldset name="basic">
+  	  <field name="enabled" type="radio" default="1" label="Enable" description="Enable Pay by Cash">
+  	  	<option value="1">Yes</option>
+		<option value="0">No</option>
+  	  </field>
+  	  <field name="display_name" type="text" required="required" default="" label="Display Name" description="Name appears at payment page of frontend"/>
+		  <field name="description" type="textarea" required="required" default="" label="Description" description="Display when Onepay is choosed"/>
+		 
+	  <field name="gateway" type="text" required="true" size="30" default="" description="Name display in Onepay page" label="Gateway name"/>
+	  
+		<field name="merchant_id" type="text" size="50" default="" label="Merchant ID" />
+		<field name="access_code" type="text" size="50" default="" label="Access Code" />
+		<field name="merchant_key" type="text" size="50" default="" label="Hashcode" />
+		<field name="international" type="radio" default="0" label="Use in" description="Apply payment for local of VietNam or international"  class="btn-group">
+          <option value="0">local</option>
+          <option value="1">international</option>
+        </field>
+		
+		<field type="note" name="sandboxnote" label="Document for sandbox test: https://mtf.onepay.vn/developer/?page=tongquan_quy_trinh"/>
+		
+        <field name="sandbox" type="radio" default="0" label="Enable Test Mode"  class="btn-group">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </field>
+		
+		
+		<field name="test_merchant_id" type="text" size="50" default="ONEPAY" label="TEST Merchant ID" />
+		<field name="test_access_code" type="text" size="50" default="D67342C2" label="TEST Access Code" />
+		<field name="test_merchant_key" type="text" size="50" default="A3EFDFABA8653DF2342E8DAC29B51AF0" label="TEST Hashcode" />
+				
+		</fieldset>
+</config>

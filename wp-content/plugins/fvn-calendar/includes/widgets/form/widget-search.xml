@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="params" label="route">
+		<field name="title" type="text" default="Search Route" class="widefat"
+			label="Title" description="Title" />	
+			
+		<field name="adult_option_limit" type="number" default="10" class="widefat"
+			label="Adults limit" description="Maximum number of adults in a booking" />	
+		<field name="child_option" type="list" default="1"
+			label="Child option" description="Showing option to choose children when booking">
+			<option value="0">No hide</option>
+			<option value="1">Yes optional</option>
+		</field>
+		<field name="child_option_limit" type="number" default="10" class="widefat"
+			label="Children limit" description="Maximum number of children in a booking" />
+			
+		<field name="infant_option" type="list" default="1" class="widefat"
+			label="Infant option" description="Showing option to choose infant when booking">
+			<option value="0" all="ddfdf">No hide</option>
+			<option value="1">Yes optional</option>
+		</field>
+		<field name="infant_option_limit" type="number" default="10" class="widefat"
+			label="Infants limit" description="Maximum number of infants in a booking" />
+			
+	</fieldset>
+
+</form>
