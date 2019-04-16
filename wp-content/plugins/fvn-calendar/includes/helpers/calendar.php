@@ -26,7 +26,20 @@ class FvnCalendarHelper{
         }
         $booked = self::getBooked($date);
         $result = [];
-        // foreach($)
+        $start_time = "08:00";
+        $end_time = "24:00";
+        foreach($booked as $period){
+            $result[] = array(
+                'start_time' => $start_time,
+                'end_time' => $period['start_time']
+            );
+            $start_time = $period['end_time'];
+        }
+        $result[] = array(
+            'start_time' => $start_time,
+            'end_time' => $end_time
+        );
+        
         return $result;
     }
 }

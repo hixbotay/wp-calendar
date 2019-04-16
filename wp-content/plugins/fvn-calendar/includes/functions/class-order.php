@@ -10,7 +10,20 @@ defined('ABSPATH') or die('Restricted access');
 
 FvnImporter::helper('calendar');
 class FvnActionOrder extends FvnAction{
-	private function validateOrder($data){
+
+	private function validateOrder($data){]
+		if(!$data['date'] || !$data['start_time'] || !$data['end_time']){
+			$this->error = 'Vui lòng điền thời gian đặt lịch hẹn';
+			return false;
+		}
+		if($data['start_time'] >= !$data['end_time']){
+			$this->error = 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc';
+			return false;
+		}
+		if($data['start_time'] > !$data['end_time']){
+			$this->error = 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc';
+			return false;
+		}
 		$booked = FvnCalendarHelper::getBooked();
 		if(isset($booked[$data['date']])){
 			foreach($booked[$data['date']] as $period){
@@ -63,16 +76,11 @@ class FvnActionOrder extends FvnAction{
 			}else{
 				$config = HBFactory::getConfig();			
 				
-				$data['start'] = FvnDateHelper::createFromFormatYmd($data['date']);		
-				$data['total'] = $data['total'];
-				$data['notes'] = $data['notes'];
+				$data['start'] = FvnDateHelper::createFromFormatYmd($data['date']);	
 				$data['user_id'] = $user->id;
 				$data['pay_status']= FvnParamPayStatus::PENDING['value'];
 				$data['order_status']= FvnParamOrderStatus::PENDING['value'];
 				$data['currency'] = $config->main_currency;
-				$data['start_time'] = $data['start_time'];
-				$data['end_time'] = $data['end_time'];
-				$data['type'] = $data['type'];
 
 				if(!$this->validateOrder($data)){
 					throw new Exception($this->error_msg);
@@ -83,7 +91,8 @@ class FvnActionOrder extends FvnAction{
 				if($check){
 					$result['status'] = 1;
 					$result['order_id'] = $order->id;
-					$result['url'] = site_url('/?hbaction=payment&task=process&order_id='.$order->id.'&pay_method='.$this->input->get('pay_method'));
+					// $result['url'] = site_url('/?hbaction=payment&task=process&order_id='.$order->id.'&pay_method='.$this->input->get('pay_method'));
+					$result['url'] = FvnHelper::get_order_link($order);
 				}else{
 					$result['error']['msg'] = $wpdb->last_error;					
 				}
