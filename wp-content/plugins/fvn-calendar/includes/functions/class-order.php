@@ -30,10 +30,10 @@ class FvnActionOrder extends FvnAction{
 				if(($data['start_time'] > $period['start_time'] && $data['end_time'] <= $period['end_time']) ||
 				($data['start_time'] == $period['start_time'] && $data['end_time'] <= $period['end_time']) ||
 				($data['start_time'] < $period['start_time'] && $data['end_time'] >= $period['end_time'])){
-					$this->error = "<b>Thời gian bạn có thể đặt lịch:</b><br>";
+					$this->error = "<span style='color:red'>Thời gian bạn muốn đặt lịch hẹn đã bị trùng trong ngày: {$data['date']}</span><br><b>Thời gian bạn có thể đặt lịch:</b><br>";
 					$availables = FvnCalendarHelper::getAvailable($data['date']);
 					foreach($availables as $p){
-						$this->error .= "Từ {$p['start_time']} -> {$p['end_time']}<br>";
+						$this->error .= "Từ {$p['start_time']} đến {$p['end_time']}<br>";
 					}
 					return false;
 				}
@@ -105,49 +105,5 @@ class FvnActionOrder extends FvnAction{
 		exit;
 	}
 	
-	public function draw(){
-		FvnImporter::model('drawrequest','orders');
-		FvnImporter::helper('email');
-		$order = new FvnModelOrders();
-		$order->load($this->input->getInt('order_id'));
-		FvnHelper::checkLogin();
-
-		if(!$order->id){
-			wp_die('Invalid order');
-		}
-		if($order->order_status!="CONFIRMED" && $order->pay_status!='SUCCESS'){
-			hb_enqueue_message('Gói đầu tư chưa được thanh toán hoặc chưa được xác nhận không đủ điều kiện rút tiền');
-			wp_safe_redirect(site_url('/myorders'));
-			exit;
-		}
-		//kiem tra xem order da dc yeu cau rut tien trc do chua
-		$allow_draw = true;
-		$draw_request = (new FvnModelDrawRequest())->getRequestByOrder($order->id);
-		foreach($draw_request as $req){
-			if($req->status=='PENDING' || $req->status=='APPROVED'){
-				$allow_draw=false;
-			}
-		}
-		if($allow_draw){
-			$draw = new FvnModelDrawRequest();
-			$check = $draw->save(array(
-				'invest_package_id' => $order->invest_package_id,
-				'order_id' => $order->id,
-				'user_id'=>$order->user_id,
-				'status' =>'PENDING',
-				'created'=>current_time( 'mysql' )
-			));
-			if($check){
-				//gui mail cho admin
-				$mail = new FvnMailHelper($order->id);
-				$mail->sendDrawRequestAdmin();
-
-				hb_enqueue_message('Đăng kí rút tiền thành công đang chờ Admin duyệt');
-			}
-		}
-		
-		
-		wp_safe_redirect(site_url('/mydrawrequest/'));
-		exit;
-	}
+	
 }

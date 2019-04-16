@@ -1,41 +1,147 @@
-<?php
-FvnImporter::model('orders');
-FvnImporter::helper('math','date','currency');
-// FvnHelper::checkLogin();
+<?php 
+FvnImporter::model('investpackage','orders');
+FvnImporter::helper('currency', 'date','invest');
+FvnHelper::checkLogin();
 
 $input = HBFactory::getInput();
-$order_id = $input->getInt('order_id');
-$model = new FvnModelOrders();
+if($input->getInt('order_id')){
+	$order = (new FvnModelOrders())->getComplexItem($input->getInt('order_id'));
+    $total = $order->order->total;
+}else{
+    $total = $input->getInt('total');
+}
+// debug($order);
+add_filter('pre_get_document_title', function () {
+	return 'Đặt lịch hẹn ' . $package->name;
+});
+// wp_enqueue_style( 'visa', FVN_URL.'assets/css/visa.css', '', '1.0.0' );
 $user = HBFactory::getUser();
-$order_complex = $model->getComplexItem($order_id);
-$item = $order_complex->order;
 
-add_filter('pre_get_document_title',function(){return 'Đặt lịch hẹn';});
-get_header();
+if($total<$package->min_price || $day<1){
+	wp_die('404 NOT FOUND');
+}
+$payment_plugin = HBList::getPaymentAvailPlugin();
+$default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
+// debug($payment_plugin);die;
 ?>
+<?php get_header(); ?>
 <div class="container">
-	<?php echo FvnHelper::renderLayout('user-sidebar',array('layout'=>'orders'))?>
+    <form id="frontForm" name="frontForm" action="<?php echo site_url()?>" method="POST">
+        <h3>Đặt lịch hẹn</h3>
 
-	<h2>Chi tiết gói đầu tư</h2>
-	<table class="table table-bordered">
-		<tr>
-			<td>Mã giao dịch</td>
-			<td>Gói đầu tư</td>
-			<td>Tổng tiền đầu tư</td>
-			<td>Trạng thái</td>
-			<td>Dự kiến</td>
-			<td>Ngày bắt đầu</td>
-		</tr>
-		<tr>
-			<td><?php echo $item->order_number?></td>
-			<td><?php echo $order_complex->package->name?></td>
-			<td><?php echo FvnCurrencyHelper::displayPrice($item->total)?></td>
-			<td><?php echo FvnParamOrderStatus::getDisplay($item->order_status)?></td>
-			<td><?php echo FvnCurrencyHelper::displayPrice(FvnInvestHelper::caculateDrawAble($item)['total'])?></td>
-			<td><?php echo FvnDateHelper::display($item->start);?></td>
-		</tr>
-	</table>
-	<?php if($allow_draw){?><a href="<?php echo site_url('?hbaction=order&task=draw&order_id='.$order_id)?>" class="btn btn-primary">Rút tiền</a><?php }?>
-	<a href="<?php echo site_url('/myorders')?>" class="btn btn-primary">Quay lại</a>
+        <div class="content clearfix"></div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">Số tiền đầu tư</div>
+            <div class="col-sm-9"><?php echo FvnCurrencyHelper::displayPrice($total) ?></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Số ngày</div>
+            <div class="col-sm-9"><?php echo $day ?> ngày</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Số tiền lãi dự tính</div>
+            <div class="col-sm-9"><?php echo FvnCurrencyHelper::displayPrice($result['revenue']).' + '.FvnCurrencyHelper::displayPrice($total).' = '.FvnCurrencyHelper::displayPrice($result['total'])?></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Chú ý</div>
+            <div class="col-sm-9"><textarea class="form-control" rows="15" name="data[notes]"></textarea></div>
+        </div>
+
+        <br>
+        <!-- <h3><?php echo __('Chọn phương thức thanh toán') ?></h3> -->
+
+        <div id="payment-area" style="display:none">
+							<?php foreach($payment_plugin as $p){?>
+								<p>
+								<input type="radio" id="payment_method_<?php echo $p->name?>" name="pay_method" value="<?php echo $p->name?>"/> <?php echo $p->params->display_name?>          
+							</p>
+							<?php }?>
+        </div>
+				<pre id="payment_description"></pre>
+        <input type="hidden" name="jform[order_id]" value="<?php echo $input->getInt('order_id') ?>" />
+        <input type="hidden" name="hbaction" value="order" />
+        <input type="hidden" name="task" value="book" />
+        <?php wp_nonce_field( 'hb_action', 'hb_meta_nonce' );?>
+        <div class="form-group" style="padding-top: 20px; padding-bottom: 20px;">
+            <div class="text-center">
+                
+                <button class="btn btn-danger btn_next" type="button" onclick="return submitForm()">Xác nhận <i class="icon-double-angle-right icon-large"></i></button>
+            </div>
+        </div>
+    </form>
 </div>
-<?php get_footer() ?>
+<script>
+jQuery(document).ready(function($){
+	$('input[name="pay_method"]').click(function(){
+			var payment =  $(this).val();
+			jQuery.ajax({
+                type: "POST",
+                url: '<?php echo site_url() ?>/?hbaction=payment&task=getPaymentForm&element='+payment+'&hb_meta_nonce=<?php echo wp_create_nonce('hb_meta_nonce'); ?>',                                
+                success: function(result) {
+                    jQuery('#payment_description').html(result);
+                },
+                error: function() {
+                    displayProcessingForm(0);
+                    alert('<?php echo __('System error warn'); ?>');
+                }
+            });
+	});
+	$('#payment_method_<?php echo $default_plugin?>').trigger('click');
+});
+    function submitForm() {
+        var form = jQuery("#frontForm");
+        //var validator = form.validate();
+        if (1) { //form.valid()){
+            if (jQuery("input[name='pay_method']").is(":checked") == false) {
+                alert("<?php echo __('Please choose a payment method') ?>");
+                return false;
+            }
+
+            //form.submit();
+            displayProcessingForm(1);
+            jQuery.ajax({
+                type: "POST",
+                url: '<?php echo site_url('/?hbaction=order&task=book') ?>',
+                dataType: 'json',
+                data: form.serialize(), // serializes the form's elements.
+                success: function(result) {
+                    jQuery('#order_id').val(result.order_id);
+                    if (result.hasOwnProperty("status")) {
+                        if (result.status == 1) {
+                            window.location = result.url;
+                        } else {
+                            displayProcessingForm(0);
+                            alert(result.error.msg);
+                            return false;
+                        }
+                    } else {
+                        displayProcessingForm(0);
+                        alert('<?php echo __('System error warn'); ?>');
+                    }
+                },
+                error: function() {
+                    displayProcessingForm(0);
+                    alert('<?php echo __('System error warn'); ?>');
+                }
+            });
+        } else {
+            //validator.focusInvalid();
+        }
+        return false;
+    }
+
+    function displayProcessingForm(enable) {
+        if (enable) {
+            jQuery('button').prop("disabled", true);
+            jQuery('body').css("opacity", '0.5');
+            jQuery('body').append('<img id="loading"  style="position: fixed;top:50%;left: 50%;width:100px;z-index:999;" src="<?php echo FVN_URL . 'assets/images/loading.gif' ?>"/>');
+            // 		jQuery('#loading').show();
+        } else {
+            jQuery('button').prop("disabled", false);
+            jQuery('body').css("opacity", '1');
+            jQuery('#loading').remove();
+        }
+    }
+</script>
+<?php get_footer(); ?> 

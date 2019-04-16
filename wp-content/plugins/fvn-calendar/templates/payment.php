@@ -4,27 +4,12 @@ FvnImporter::helper('currency', 'date','invest');
 FvnHelper::checkLogin();
 
 $input = HBFactory::getInput();
-$id = $input->getInt('invest_package_id');
 if($input->getInt('order_id')){
 	$order = (new FvnModelOrders())->getComplexItem($input->getInt('order_id'));
-	$package = $order->package;
     $total = $order->order->total;
-    $day = $order->order->day;
 }else{
-	$package = (new FvnModelInvestPackage())->getItem($id);
     $total = $input->getInt('total');
-    $day = $input->getInt('day');
 }
-if (!$package->id) {
-	hb_enqueue_message('Gói đầu tư không tìm thấy', 'error');
-	wp_redirect(site_url('message'));
-}
-$result = FvnInvestHelper::caculateDrawAble(array(
-    'total'=>$total,
-    'start' => date('Y-m-d'),
-    'end' => FvnDateHelper::getDate()->modify('+'.$day.' days')->format('Y-m-d'),
-    'invest_package_id'=>$package->id
-),true);
 // debug($order);
 add_filter('pre_get_document_title', function () {
 	return 'Thanh toán Gói đầu tư ' . $package->name;
@@ -80,7 +65,7 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
         <br>
         <h3><?php echo __('Chọn phương thức thanh toán') ?></h3>
 
-        <div id="payment-area">
+        <div id="payment-area" style="display:none">
 							<?php foreach($payment_plugin as $p){?>
 								<p>
 								<input type="radio" id="payment_method_<?php echo $p->name?>" name="pay_method" value="<?php echo $p->name?>"/> <?php echo $p->params->display_name?>          

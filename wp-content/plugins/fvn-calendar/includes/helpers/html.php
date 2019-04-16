@@ -118,6 +118,10 @@ class FvnHtml
 		wp_register_style( 'jquery-ui', 'http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css' );
 		wp_enqueue_style( 'jquery-ui' );		
 	}
+	static function add_timepicker_lib(){
+		wp_register_style( 'time-picker', FVN_URL.'assets/css/bootstrap-timepicker.min.css' );
+		wp_enqueue_script( 'time-picker', FVN_URL.'assets/js/bootstrap-timepicker.min.js' );
+	}
 	
 	/*
 	 * Create calendar html box
@@ -330,6 +334,22 @@ class FvnHtml
 	static function editor($name,array $attr,$value,$id){	
 		$attr['textarea_name'] = $name;
 		return wp_editor( $value, $id, $attr );
+	}
+
+	static function time_picker($name, $value,$id,$attr=null,$options=null){
+		self::add_timepicker_lib();
+		if(!isset($options['showMeridian']))//format 24 gio
+			$options['showMeridian'] = false;
+		
+		$script = '<script>
+					jQuery(document).ready(function($){
+						$("#'.$id.'").timepicker('.json_encode($options).');
+					});</script>';
+		$html = '<div class="input-append bootstrap-timepicker">
+							<input type="text" name="'.$name.'" id="'.$id.'" '.$attr.' value="'.$value.'"/>
+							<span class="add-on"><i class="icon-clock icon-black"></i></span>
+						</div>	';
+		return $script.$html;
 	}
 		
 	
