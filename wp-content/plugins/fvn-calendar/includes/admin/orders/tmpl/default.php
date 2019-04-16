@@ -9,7 +9,7 @@
  **/
 // die('ddfdf');
 defined('ABSPATH') or die('Restricted access');
-HBImporter::helper('currency','date','orderstatus','paystatus','params','invest');
+FvnImporter::helper('currency','date','orderstatus','paystatus','params','invest');
 global $wpdb;
 $total = $wpdb->get_var("SELECT count(1) FROM {$wpdb->prefix}fvn_orders");
 $paid_count = $wpdb->get_var("SELECT count(1) FROM {$wpdb->prefix}fvn_orders WHERE pay_status = 'SUCCESS'");
@@ -126,7 +126,7 @@ if ($this->input->get('pay') == 'pending'){
 						</td>
                         
 						<td><?php echo $item->user_display_name;?></td>
-						<td><?php echo HBDateHelper::display($item->start)?></td>
+						<td><?php echo FvnDateHelper::display($item->start)?></td>
 						<td><span <?php echo $color?>><?php echo FvnParamPayStatus::getDisplay($item->pay_status)?></span></td>
                         <td <?php echo $order_color; ?> >
                             <?php echo FvnParamOrderStatus::getDisplay($item->order_status);?>

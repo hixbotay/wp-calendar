@@ -1,6 +1,6 @@
 <?php
-HBImporter::model('orders');
-HBImporter::helper('math','date','currency');
+FvnImporter::model('orders');
+FvnImporter::helper('math','date','currency');
 // FvnHelper::checkLogin();
 
 $input = HBFactory::getInput();
@@ -32,7 +32,7 @@ get_header();
 			<td><?php echo FvnCurrencyHelper::displayPrice($item->total)?></td>
 			<td><?php echo FvnParamOrderStatus::getDisplay($item->order_status)?></td>
 			<td><?php echo FvnCurrencyHelper::displayPrice(FvnInvestHelper::caculateDrawAble($item)['total'])?></td>
-			<td><?php echo HBDateHelper::display($item->start);?></td>
+			<td><?php echo FvnDateHelper::display($item->start);?></td>
 		</tr>
 	</table>
 	<?php if($allow_draw){?><a href="<?php echo site_url('?hbaction=order&task=draw&order_id='.$order_id)?>" class="btn btn-primary">Rút tiền</a><?php }?>

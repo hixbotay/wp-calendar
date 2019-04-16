@@ -8,7 +8,7 @@
  * @version 	$Id: airport.php 66 2012-07-31 23:46:01Z quannv $
  **/
 defined( 'ABSPATH' ) or die( 'Direct Access to this location is not allowed.' );
-class HBDateHelper {	
+class FvnDateHelper {	
 	static $format;
 		
 	static function dayofweek(){

@@ -5,8 +5,8 @@ class FvnMailHelper{
 	public $from_email;
 	
 	function __construct($order_id){
-		HBImporter::model('orders');
-		HBImporter::helper('currency');
+		FvnImporter::model('orders');
+		FvnImporter::helper('currency');
 		$model = new FvnModelOrders();
 		$this->order_complex = $model->getComplexItem($order_id);		
 		$config = HBFactory::getConfig();
@@ -101,7 +101,7 @@ class FvnMailHelper{
 		$input = str_replace('{bank_name}', $this->order_complex->user->bank_name, $input);
 		$input = str_replace('{bank_number}', $this->order_complex->user->bank_number, $input);
 		$input = str_replace('{package_name}', $this->order_complex->package->name, $input);
-		$input = str_replace('{order_days}', HBDateHelper::getDate($this->order_complex->order->end)->diff(HBDateHelper::getDate($this->order_complex->order->start))->days, $input);
+		$input = str_replace('{order_days}', FvnDateHelper::getDate($this->order_complex->order->end)->diff(FvnDateHelper::getDate($this->order_complex->order->start))->days, $input);
 		$input = str_replace('{order_status}', FvnParamOrderStatus::getDisplay($this->order_complex->order->order_status), $input);
 		$input = str_replace('{pay_status}', FvnParamPayStatus::getDisplay($this->order_complex->order->pay_status), $input);
 

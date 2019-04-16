@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-HBImporter::helper('file');
+FvnImporter::helper('file');
 $this_version = '1.0.0';
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

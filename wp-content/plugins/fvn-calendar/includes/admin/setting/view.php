@@ -7,7 +7,7 @@ class FvnAdminViewSetting extends FvnAdminView {
 	protected $form;
 	public function display($tpl = null) {
 		
-		HBImporter::libraries ( 'form' );
+		FvnImporter::libraries ( 'form' );
 		$this->form = new HBForm ( 'setting' );
 		//debug($this->form);
 		$this->input = HBFactory::getInput();
@@ -69,7 +69,7 @@ class FvnAdminViewSetting extends FvnAdminView {
 	public function emailTab() {
 		$input = HBFactory::getInput();
 		$active_tab = $input->getString('template','customer');
-		HBImporter::helper('email');
+		FvnImporter::helper('email');
 		?>
 		<h2 class="nav-tab-wrapper">
 			<a href="?page=setting&layout=notify&template=customer" class="nav-tab <?php echo $active_tab == 'customer' ? 'nav-tab-active' : ''; ?>">Gửi khách hàng</a>

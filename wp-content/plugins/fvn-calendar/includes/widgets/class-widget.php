@@ -18,7 +18,7 @@ class HB_Widget extends WP_Widget {
 			return false;
 		}
 		
-		HBImporter::libraries('form');
+		FvnImporter::libraries('form');
 		$form = new HBForm($this->id_base);		
 		$form->loadFile($this->form_path);
 		//bind data to form

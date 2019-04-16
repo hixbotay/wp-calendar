@@ -1,5 +1,5 @@
 <?php
-HBImporter::helper('params');
+FvnImporter::helper('params');
 //debug($this->item);
 $query = HBFactory::getQuery();
 $query->select('*')->from('#__users');

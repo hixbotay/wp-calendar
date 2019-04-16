@@ -13,7 +13,7 @@ class FvnActionPayment extends FvnAction{
 	 * Generate checkout page of payment gateway
 	 */
 	function process(){
-		HBImporter::model('orders');
+		FvnImporter::model('orders');
 		$order = new FvnModelOrders();
 		$order->load($this->input->getInt('order_id'));
 // 		FvnHelper::check_nonce();				
@@ -35,7 +35,7 @@ class FvnActionPayment extends FvnAction{
 		//import core plugin
 		
 		$payment_plugin = 'hbpayment_'.$payment_plugin;
-		HBImporter::corePaymentPlugin();
+		FvnImporter::corePaymentPlugin();
 		$order_id = $order->id;
 		$payment = new $payment_plugin();
 		$payment->config = HBFactory::getConfig();
@@ -88,8 +88,8 @@ class FvnActionPayment extends FvnAction{
 	function confirm()
 	{
 		//import core plugin
-		HBImporter::corePaymentPlugin();
-		HBImporter::model('orders');		
+		FvnImporter::corePaymentPlugin();
+		FvnImporter::model('orders');		
 		do_action('hb_order_process_execute_before');		
 		$plugin = $this->input->getString('method');
 		$config = HBFactory::getConfig();
@@ -121,8 +121,8 @@ class FvnActionPayment extends FvnAction{
 		exit;
 	}	
 	private function sendMail($order_id){	
-		HBImporter::model('orders');
-		HBImporter::helper('currency','email');
+		FvnImporter::model('orders');
+		FvnImporter::helper('currency','email');
 		$mail = new FvnMailHelper($order_id);
 		$mail->sendCustomer();
         $mail->sendAdmin();        

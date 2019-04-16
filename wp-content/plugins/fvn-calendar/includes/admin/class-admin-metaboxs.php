@@ -65,7 +65,7 @@ class HB_Admin_Meta_Boxes {
 		if(strpos('hb', $screen->post_type)==0){
 			$view_name = substr($screen->post_type, 3);
 			if(is_file(FVN_PATH.'includes/admin/'.$view_name.'/metabox.php')){
-				HBImporter::metabox($view_name);
+				FvnImporter::metabox($view_name);
 			}
 		}
 
@@ -120,7 +120,7 @@ class HB_Admin_Meta_Boxes {
 
 		// import metabox and save
 		$view_name = substr($post->post_type, 8);
-		HBImporter::metabox($view_name);
+		FvnImporter::metabox($view_name);
 		$class = 'HBView'.$view_name.'_Metabox';
 		//$func = 'save_'.$post->post_type;
 		$check = $class::save( $post_id, $post );

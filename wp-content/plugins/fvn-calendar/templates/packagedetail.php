@@ -1,6 +1,6 @@
 <?php 
-HBImporter::model('investpackage');
-HBImporter::helper('currency','date');
+FvnImporter::model('investpackage');
+FvnImporter::helper('currency','date');
 $input = HBFactory::getInput();
 $id = FvnHelper::get_url_path()[1];
 $package = (new FvnModelInvestPackage())->getItem($id);
@@ -33,7 +33,7 @@ $user = HBFactory::getUser();
 			<div class="row">
 				<div class="col-sm-3">Lãi xuất</div>
 				<div class="col-sm-9" id="lai_xuat">
-					<?php if($package->type==FvnParamInvestType::MONTHLY['value']){?>
+					<?php if($package->type==FvnParamVideoCallType::MONTHLY['value']){?>
 						<?php foreach($package->rate as $month=>$rate){
 							$month = $month<12 ? "{$month} tháng" : ($month==12 ? "1 năm" : ">12 tháng");
 							echo "{$month}: {$rate}%<br>";
@@ -59,21 +59,21 @@ $user = HBFactory::getUser();
 			<div class="form-group row">
 				<label for="inputPassword" class="col-sm-3 col-form-label">Thời gian</label>
 				<div class="col-sm-9">
-					<?php if($package->type == FvnParamInvestType::MONTHLY['value']){?>
+					<?php if($package->type == FvnParamVideoCallType::MONTHLY['value']){?>
 						<select name="day" class="form-value ">
 							<option value="90">3 tháng</option>
 							<option value="180">6 tháng</option>
 							<option value="365">1 năm</option>
 						</select>
 					<?php }?>
-					<?php if($package->type == FvnParamInvestType::YEAR['value']){?>
+					<?php if($package->type == FvnParamVideoCallType::YEAR['value']){?>
 						<select name="day" class="form-value ">
 							<option value="365">1 năm</option>
 							<option value="730">2 năm</option>
 							<option value="1095">3 năm</option>
 						</select>
 					<?php }?>
-					<?php if($package->type == FvnParamInvestType::DAY['value']){?>
+					<?php if($package->type == FvnParamVideoCallType::DAY['value']){?>
 						<input type="number" name="day" required class="form-value form-control" value="" min="1" />
 					<?php }?>
 					

@@ -57,7 +57,7 @@ class HB_Site_Autoload{
 			
 			$task = $input->get('task');
 			//Import action by request
-			HBImporter::functions($request_action);
+			FvnImporter::functions($request_action);
 			$class = 'FvnAction'.$request_action;
 	
 			$action = new $class;

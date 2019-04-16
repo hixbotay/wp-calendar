@@ -109,9 +109,9 @@ class FvnAdminView{
 
 		$this->_path = $this->_basePath . 'includes/admin/' .$this->_name . '/tmpl';
 // 		debug($this->_name);
-		if (HBImporter::find($this->_basePath. 'includes/admin/' .$this->_name, 'model')){
+		if (FvnImporter::find($this->_basePath. 'includes/admin/' .$this->_name, 'model')){
 			
-			HBImporter::includes('admin/'.$this->_name.'/model');
+			FvnImporter::includes('admin/'.$this->_name.'/model');
 			$class_model = "FvnModel{$this->_name}";
 			$this->_defaultModel = $class_model;
 			$this->_models[$class_model] = new $class_model();
@@ -200,7 +200,7 @@ class FvnAdminView{
 		
 		
 		
-		$this->_template = HBImporter::find($this->_path, $filetofind);
+		$this->_template = FvnImporter::find($this->_path, $filetofind);
 // 		debug($this->_template) ;
 		if ($this->_template != false)
 		{

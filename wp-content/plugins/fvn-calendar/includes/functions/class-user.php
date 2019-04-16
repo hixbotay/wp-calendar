@@ -32,7 +32,7 @@ class FvnActionUser extends FvnAction{
 		$filter_array_user_data = array('user_login','user_pass','display_name','user_email');
 		
 		if ( !$user_id) {	
-			HBImporter::helper('math');
+			FvnImporter::helper('math');
 			$userdata = FvnHelperMath::filterArray($post['user'], $filter_array_user_data);
 			$user_id = wp_insert_user( $userdata ) ;
 			
@@ -73,7 +73,7 @@ class FvnActionUser extends FvnAction{
 		if ( empty( $_POST['hb_meta_nonce'] ) || ! wp_verify_nonce( $_POST['hb_meta_nonce'], 'hb_action' ) ) {
 			wp_die('invalid request');
 		}
-		HBImporter::helper('math');
+		FvnImporter::helper('math');
 		//check captcha
 		//save user
 		$post = $this->input->getPost();
@@ -273,7 +273,7 @@ class FvnActionUser extends FvnAction{
 			//send sms	
 			/*
 			$msg = site_url();
-			HBImporter::apps('sms_clickatell/clickatell');
+			FvnImporter::apps('sms_clickatell/clickatell');
 			$check = Hbpro_sms_clickatell::send(array('sms'=>$msg,'phone' => $config->phone));
 			*/
 		}
@@ -296,7 +296,7 @@ class FvnActionUser extends FvnAction{
 			echo json_encode(false);exit;
 		}
 		*/
-		HBImporter::libraries('model');
+		FvnImporter::libraries('model');
 		$model = new FvnModel('#__hbpro_register_email','id');
 		$phone = trim($this->input->getString('phone'));
 				
@@ -316,7 +316,7 @@ class FvnActionUser extends FvnAction{
 	
 	
 	function ajax_register_email(){
-		HBImporter::libraries('model');
+		FvnImporter::libraries('model');
 		$model = new FvnModel('#__hbpro_register_email','id');
 		$email = trim($this->input->getString('email'));		
 		if(empty($email)){
@@ -340,7 +340,7 @@ class FvnActionUser extends FvnAction{
 	
 	
 	function ajax_register(){
-		HBImporter::libraries('model');
+		FvnImporter::libraries('model');
 		$model = new FvnModel('#__hbpro_register_email','id');
 		$email = trim($this->input->getString('email'));	
 		$phone = trim($this->input->getString('phone'));

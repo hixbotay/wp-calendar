@@ -14,7 +14,7 @@
 //namespace HB;
 
 defined('ABSPATH') or die('Restricted access');
-class HBImporter
+class FvnImporter
 {
 	static $libs = array();
 	/**

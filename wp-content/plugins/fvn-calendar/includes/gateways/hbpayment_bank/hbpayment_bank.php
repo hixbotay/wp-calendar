@@ -64,8 +64,8 @@ class HbPayment_Bank
 		$this->order->order_status = FvnParamOrderStatus::WAITTING_APPROVE['value'];
 		$result = array();
 		if($this->order->store()){			
-			HBImporter::model('orders');
-			HBImporter::helper('currency','email');
+			FvnImporter::model('orders');
+			FvnImporter::helper('currency','email');
 			$mail = new FvnMailHelper($this->order->id);
 			$mail->sendPayment('bank');
 			

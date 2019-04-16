@@ -9,7 +9,7 @@
  **/
 // die('ddfdf');
 defined ( 'ABSPATH' ) or die ( 'Restricted access' );
-HBImporter::helper('currency','invest');
+FvnImporter::helper('currency','invest');
 ?>
 <form action="admin.php" action="GET" id="adminForm" name="adminForm">
 <div class="wrap">

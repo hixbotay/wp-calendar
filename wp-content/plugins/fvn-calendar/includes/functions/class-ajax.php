@@ -54,7 +54,7 @@ class FvnActionAjax extends FvnAction{
 	}
 	
 	function getPostByCategory(){
-		HBImporter::helper('post');
+		FvnImporter::helper('post');
 		$category_name = $this->input->getString('category_name');
 		
 		$limit = $this->input->getInt('limit');
@@ -72,7 +72,7 @@ class FvnActionAjax extends FvnAction{
 	}
 	
 	function get_post_floor(){
-		HBImporter::helper('post');
+		FvnImporter::helper('post');
 		$category_name = 'mat-bang';
 		
 		$limit = $this->input->getInt('limit');

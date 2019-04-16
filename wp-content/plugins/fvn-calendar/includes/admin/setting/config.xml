@@ -2,6 +2,7 @@
 <config>	
 	<fieldset name="MainSettings" label="Main Settings">					
 		<field name="main_currency" type="text" label="Main Currency" default="USD" />
+		<field name="order_period" type="number" label="Khoảng thời gian tối đa một cuộc gọi (giờ)" default="2" />
 		<field name="currency_symbol" type="text" label="Currency symbol" default="$"/>
 		<field name="passenger_limit" type="number" label="Passenger limit" default="15"/>
  		<field name="extra_service_notice" type="note" label="Extra service"/>

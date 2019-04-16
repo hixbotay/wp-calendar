@@ -71,13 +71,13 @@ class HB_Widget_Search extends HB_Widget {
 	 * @param array $instance        	
 	 */
 	public function output($args, $instance) {
-		HBImporter::js ( 'select2', 'widget_HB_search' );
-		HBImporter::css ( 'select2' );
-		HBImporter::helper ( 'date' );
+		FvnImporter::js ( 'select2', 'widget_HB_search' );
+		FvnImporter::css ( 'select2' );
+		FvnImporter::helper ( 'date' );
 		wp_enqueue_script ( 'jquery-ui-datepicker' );
 		wp_enqueue_style ( 'jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css' );
-		$js_format = HBDateHelper::getConvertDateFormat ( 'J' );
-		$date_format = HBDateHelper::getConvertDateFormat ( 'P' );
+		$js_format = FvnDateHelper::getConvertDateFormat ( 'J' );
+		$date_format = FvnDateHelper::getConvertDateFormat ( 'P' );
 		echo '<script type="text/javascript">
 				var dateFormat = "' . $js_format . '";
 				var msg_depart_warn = "' . __ ( 'Please select depature destination', 'hb' ) . '";

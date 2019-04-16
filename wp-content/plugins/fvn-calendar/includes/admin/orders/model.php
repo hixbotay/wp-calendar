@@ -1,5 +1,5 @@
 <?php
-HBImporter::helper('date','invest');
+FvnImporter::helper('date','invest');
 class FvnModelOrders extends FvnModel{
 	public function __construct($table_name='#__fvn_orders', $primary_key = 'id'){
 		return parent::__construct($table_name, $primary_key);
@@ -54,15 +54,29 @@ class FvnModelOrders extends FvnModel{
 		$query->order('id DESC');
 		return $query;		
 	}
+
+	function getBookedCalendar(){
+		$query = HBFactory::getQuery();
+		global $wpdb;
+
+		$query->select('o.id,o.start,o.start_time,o.end_time')
+		->from('#__fvn_orders as o');
+		$query->where('o.start >= '.date('Y-m-d'));
+		$query->where('o.order_status = '.FvnParamOrderStatus::CONFIRMED['value']);
+		$query->order('o.start ASC');
+		$query->order('o.start_time ASC');
+		
+		return $wpdb->get_results($query->__toString());
+	}	
 	
 	function getComplexItem($id){
 		$order = $this->getItem($id);
 		$result = new stdClass();
 		if($order->id){
 			global $wpdb;
-			// $order->day = HBDateHelper::getDate($order->start)->diff(HBDateHelper::getDate($order->end))->days;
+			// $order->day = FvnDateHelper::getDate($order->start)->diff(FvnDateHelper::getDate($order->end))->days;
 			$result->order = $order;
-			HBImporter::helper('math','date','currency','price');
+			FvnImporter::helper('math','date','currency','price');
 			$config = HBFactory::getConfig();
 			// $result->user = HBFactory::getUser($order->user_id);
 

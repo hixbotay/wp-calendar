@@ -34,32 +34,32 @@ class HB_Menu {
 	
 	public static function dashboard(){
 	
-		HBImporter::includes('admin/setting/view');
+		FvnImporter::includes('admin/setting/view');
 	}
 		
 	public static function booking(){	
-		HBImporter::includes('admin/orders/view');
+		FvnImporter::includes('admin/orders/view');
 	}
 	public static function drawrequest(){	
-		HBImporter::includes('admin/drawrequest/view');
+		FvnImporter::includes('admin/drawrequest/view');
 	}
 	public static function investpackage(){	
-		HBImporter::includes('admin/investpackage/view');
+		FvnImporter::includes('admin/investpackage/view');
 	}
 	public static function airport(){	
-		HBImporter::includes('admin/airport/view');
+		FvnImporter::includes('admin/airport/view');
 	}
 	public static function transaction(){
-		HBImporter::includes('admin/transaction/view');
+		FvnImporter::includes('admin/transaction/view');
 	}
 	
 	
 	public static function add_register_page(){
-		HBImporter::includes('admin/register/view');
+		FvnImporter::includes('admin/register/view');
 	}
 		
 	//setting page
 	public static function add_setting_page(){
-		HBImporter::includes('admin/setting/view');
+		FvnImporter::includes('admin/setting/view');
 	}
 }

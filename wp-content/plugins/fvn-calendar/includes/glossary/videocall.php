@@ -1,9 +1,9 @@
 <?php
 
-class FvnParamInvestType{
-    const MONTHLY = ['display'=>'Theo tháng', 'value'=>'M'];
-    const YEAR = ['display'=>'Theo năm', 'value'=>'Y'];
-    const DAY = ['display'=>'Theo ngày', 'value'=>'D'];
+class FvnParamVideoCallType{
+    const ZALO = ['display'=>'Zalo', 'value'=>'1'];
+    const FACEBOOK = ['display'=>'Facebook', 'value'=>'2'];
+    const SKYPE = ['display'=>'Skype', 'value'=>'3'];
 
     public static function getAll() {
         $oClass = new \ReflectionClass(__CLASS__);

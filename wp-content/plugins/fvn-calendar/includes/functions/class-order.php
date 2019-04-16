@@ -8,34 +8,28 @@
  **/
 defined('ABSPATH') or die('Restricted access');
 
+FvnImporter::helper('calendar');
 class FvnActionOrder extends FvnAction{
 	private function validateOrder($data){
-		if($data['day']<1){
-			return false;
-		}
-		$package= (new FvnModelInvestPackage())->getItem($data['invest_package_id']);
-		if($package->type==FvnParamInvestType::MONTHLY['value']){
-			if($data['day']<30) return false;
-		}
-		if($package->type==FvnParamInvestType::YEAR['value']){
-			if($data['day']<365) return false;
+		$booked = FvnCalendarHelper::getBooked();
+		if(isset($booked[$data['date']])){
+			foreach($booked[$data['date']] as $period){
+				if(($data['start_time'] > $period['start_time'] && $data['end_time'] <= $period['end_time']) ||
+				($data['start_time'] == $period['start_time'] && $data['end_time'] <= $period['end_time']) ||
+				($data['start_time'] < $period['start_time'] && $data['end_time'] >= $period['end_time'])){
+					$this->error = "<b>Thời gian bạn có thể đặt lịch:</b><br>";
+					$availables = FvnCalendarHelper::getAvailable($data['date']);
+					foreach($availables as $p){
+						$this->error .= "Từ {$p['start_time']} -> {$p['end_time']}<br>";
+					}
+					return false;
+				}
+			}
 		}
 		return true;
 	}
 
-	public function ajax_caculate_revenue(){
-		HBImporter::helper('invest','currency','date');
-		$data = $this->input->getPost();
-		$result = FvnInvestHelper::caculateDrawAble(array(
-			'total'=>$data['total'],
-			'start' => date('Y-m-d'),
-			'end' => HBDateHelper::getDate()->modify('+'.$data['day'].' days')->format('Y-m-d'),
-			'invest_package_id'=>$data['invest_package_id']
-		),true);
-		$result['total'] = FvnCurrencyHelper::displayPrice($result['total']);
-		$result['revenue'] = FvnCurrencyHelper::displayPrice($result['revenue']);
-		$this->renderJson($result);
-	}
+	
 	public function book(){
 		$result = array(
 				'status' => 0,
@@ -51,8 +45,8 @@ class FvnActionOrder extends FvnAction{
 		// 		}
 		//validate image
 		
-		HBImporter::model('investpackage','orders');
-		HBImporter::helper('math','date','currency');
+		FvnImporter::model('orders');
+		FvnImporter::helper('math','date','currency');
 		
 		$data = $this->input->get('jform',array());
 		global $wpdb;
@@ -69,20 +63,19 @@ class FvnActionOrder extends FvnAction{
 			}else{
 				$config = HBFactory::getConfig();			
 				
-				$data['start'] = HBFactory::getDate()->format('Y-m-d');			
+				$data['start'] = FvnDateHelper::createFromFormatYmd($data['date']);		
 				$data['total'] = $data['total'];
 				$data['notes'] = $data['notes'];
 				$data['user_id'] = $user->id;
-				$data['pay_status']="PENDING";
-				$data['order_status']="PENDING";
-				$data['invest_package_id'] = $data['invest_package_id'];
-				$data['type'] = 'INVEST';
+				$data['pay_status']= FvnParamPayStatus::PENDING['value'];
+				$data['order_status']= FvnParamOrderStatus::PENDING['value'];
 				$data['currency'] = $config->main_currency;
-				$data['start'] = HBDateHelper::getDate()->format('Y-m-d');
-				$data['end'] = HBDateHelper::getDate()->modify("+{$data['day']} days")->format('Y-m-d');
+				$data['start_time'] = $data['start_time'];
+				$data['end_time'] = $data['end_time'];
+				$data['type'] = $data['type'];
 
 				if(!$this->validateOrder($data)){
-					throw new Exception('Dữ liệu không hợp lệ');
+					throw new Exception($this->error_msg);
 				}
 
 				$check = $order->save($data);		
@@ -104,8 +97,8 @@ class FvnActionOrder extends FvnAction{
 	}
 	
 	public function draw(){
-		HBImporter::model('drawrequest','orders');
-		HBImporter::helper('email');
+		FvnImporter::model('drawrequest','orders');
+		FvnImporter::helper('email');
 		$order = new FvnModelOrders();
 		$order->load($this->input->getInt('order_id'));
 		FvnHelper::checkLogin();

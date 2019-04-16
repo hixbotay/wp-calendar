@@ -1,6 +1,6 @@
 <?php
-HBImporter::helper('params');
-HBImporter::model('period');
+FvnImporter::helper('params');
+FvnImporter::model('period');
 //debug($this->item);
 $periods = (new FvnModelPeriod())->getList();
 // debug($periods);

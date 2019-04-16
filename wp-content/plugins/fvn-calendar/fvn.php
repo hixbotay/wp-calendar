@@ -56,12 +56,12 @@ class HBFactory {
 		require_once FVN_PATH.'libraries/table.php';
 		require_once FVN_PATH.'libraries/model.php';
 		
-		HBImporter::helper('debug','html','list','helper');
-		HBImporter::includes('functions','widget-functions');
-		HBImporter::params('InvestType','orderstatus','paystatus');
+		FvnImporter::helper('debug','html','list','helper');
+		FvnImporter::includes('functions','widget-functions');
+		FvnImporter::params('InvestType','orderstatus','paystatus');
 		//import require file only for admin sie
 		if(is_admin()){
-			HBImporter::includes(
+			FvnImporter::includes(
 					'admin/class-menu',
 					'admin/class-post-types',
 					'admin/functions',
@@ -77,7 +77,7 @@ class HBFactory {
 			$this->loader = new HB_Admin_Autoload();
 			$this->loader->load();
 		}else{
-			HBImporter::includes(
+			FvnImporter::includes(
 					'class-site-autoloader'
 					);
 			//load require file when need to optimize memory
@@ -158,7 +158,7 @@ class HBFactory {
 	 */
 	public static function getCart(){
 		if(empty(self::$cart)){
-			HBImporter::includes('class-cart');
+			FvnImporter::includes('class-cart');
 			self::$cart = new HBCart();
 			self::$cart->load();
 		}

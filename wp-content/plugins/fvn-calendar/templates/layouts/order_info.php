@@ -22,7 +22,7 @@
 	</li>
 	<li class="clearfix">
 		<label>Arrival date:</label>
-		<span class="arrival_date_t"><?php echo HBDateHelper::display($displayData['params']['start'])?></span>
+		<span class="arrival_date_t"><?php echo FvnDateHelper::display($displayData['params']['start'])?></span>
 	</li>
 	<li class="clearfix">
 		<label>Visa service fee:</label>

@@ -1,5 +1,5 @@
 <?php
-HBImporter::helper('invest');
+FvnImporter::helper('invest');
 class FvnActionDrawRequest extends FvnAction{	
     
     public function approve(){        
@@ -14,7 +14,7 @@ class FvnActionDrawRequest extends FvnAction{
             return;
         }
         
-        HBImporter::model('orders');
+        FvnImporter::model('orders');
         $order = new FvnModelOrders();
         $order->load($request->order_id);
         if($order->order_status != 'CONFIRMED'){
@@ -69,7 +69,7 @@ class FvnActionDrawRequest extends FvnAction{
             hb_enqueue_message('Save failed','error');
             return;
         }else{
-            HBImporter::helper('email');
+            FvnImporter::helper('email');
             $mail = new FvnMailHelper($request->order_id);
             $mail->sendRejectDrawRequest();
         }

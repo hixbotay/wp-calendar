@@ -16,7 +16,7 @@ class HB_Admin_Autoload{
 			$view_name = substr($_REQUEST['post_type'], 8);
 			//load list file if exist
 			if($this->is_file('includes/admin/'.$view_name.'/list.php')){
-				HBImporter::includes('admin/'.$view_name.'/list');
+				FvnImporter::includes('admin/'.$view_name.'/list');
 			}
 			
 		}
@@ -81,7 +81,7 @@ class HB_Admin_Autoload{
 				//@TODO check nonce
 			}
 			//Import action by request
-			HBImporter::viewaction($request_action);
+			FvnImporter::viewaction($request_action);
 			$class = 'FvnAction'.$request_action;
 			$action = new $class;
 			$action->execute($task);

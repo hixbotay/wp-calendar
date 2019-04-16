@@ -11,10 +11,10 @@ class FvnActionOrders extends FvnAction{
 		return $data;
 	}
 	public function save(){
-		HBImporter::helper('date');
+		FvnImporter::helper('date');
 		$passengers = $this->input->get('passenger');
 		foreach($passengers as &$p){
-			$p['birthday'] = HBDateHelper::createFromFormatYmd($p['birthday']);
+			$p['birthday'] = FvnDateHelper::createFromFormatYmd($p['birthday']);
 		}
 		//debug($passengers);die;
 		$model = new FvnModel('#__fvn_passengers','id');
@@ -26,7 +26,7 @@ class FvnActionOrders extends FvnAction{
 	}
 	
 	function exportCsv(){
-		HBImporter::helper('csvfilehelper');
+		FvnImporter::helper('csvfilehelper');
 		$this->loadModel();
 		$items = $this->model->getItems();
 		$loc=array('order_number','total','pay_status','notes','order_status','firstname','lastname','email','mobile');

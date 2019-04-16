@@ -1,6 +1,6 @@
 <?php 
-HBImporter::model('investpackage','orders');
-HBImporter::helper('currency', 'date','invest');
+FvnImporter::model('investpackage','orders');
+FvnImporter::helper('currency', 'date','invest');
 FvnHelper::checkLogin();
 
 $input = HBFactory::getInput();
@@ -22,7 +22,7 @@ if (!$package->id) {
 $result = FvnInvestHelper::caculateDrawAble(array(
     'total'=>$total,
     'start' => date('Y-m-d'),
-    'end' => HBDateHelper::getDate()->modify('+'.$day.' days')->format('Y-m-d'),
+    'end' => FvnDateHelper::getDate()->modify('+'.$day.' days')->format('Y-m-d'),
     'invest_package_id'=>$package->id
 ),true);
 // debug($order);
@@ -49,7 +49,7 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
         <div class="row">
             <div class="col-sm-3">Lãi xuất</div>
             <div class="col-sm-9" id="lai_xuat">
-                <?php if ($package->type == FvnParamInvestType::MONTHLY['value']) { ?>
+                <?php if ($package->type == FvnParamVideoCallType::MONTHLY['value']) { ?>
                 <?php foreach ($package->rate as $month => $rate) {
 									$month = $month < 12 ? "{$month} tháng" : ($month == 12 ? "1 năm" : ">12 tháng");
 									echo "{$month}: {$rate}%<br>";

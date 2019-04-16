@@ -10,7 +10,7 @@ class FvnActionInvestPackage extends FvnAction
 		return $data;
 	}
 	public function hookAfterSave($data){
-		if($data['type']==FvnParamInvestType::DAY['value']){
+		if($data['type']==FvnParamVideoCallType::DAY['value']){
 			$model = new FvnModel('#__fvn_invest_package_daily',['invest_package_id','date']);
 		
 			$result=  $model->save([

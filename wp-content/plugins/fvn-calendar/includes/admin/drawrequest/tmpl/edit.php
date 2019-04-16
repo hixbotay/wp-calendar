@@ -1,5 +1,5 @@
 <?php
-HBImporter::helper('params');
+FvnImporter::helper('params');
 //debug($this->item);
 ?>
 <h3><?php echo __('drawrequests')?></h3>

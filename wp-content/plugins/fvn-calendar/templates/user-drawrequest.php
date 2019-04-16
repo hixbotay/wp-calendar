@@ -1,6 +1,6 @@
 <?php
-HBImporter::model('drawrequest');
-HBImporter::helper('math','invest','currency','date');
+FvnImporter::model('drawrequest');
+FvnImporter::helper('math','invest','currency','date');
 FvnHelper::checkLogin();
 
 $model = new FvnModelDrawRequest();
@@ -31,7 +31,7 @@ get_header();
 			<td><?php echo $item->invest_name?></td>
 			<td><?php echo $item->status?></td>
 			<td><?php echo FvnCurrencyHelper::displayPrice(FvnInvestHelper::caculateDrawAble($item)['total'])?></td>
-			<td><?php echo HBDateHelper::display($item->created);?></td>
+			<td><?php echo FvnDateHelper::display($item->created);?></td>
 		</tr>
 	<?php }?>
 	</table>

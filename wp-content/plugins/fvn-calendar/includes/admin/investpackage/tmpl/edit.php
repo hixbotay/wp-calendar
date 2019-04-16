@@ -1,5 +1,5 @@
 <?php
-HBImporter::helper('params');
+FvnImporter::helper('params');
 
 // debug($this->item);
 ?>
@@ -24,7 +24,7 @@ HBImporter::helper('params');
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label"><?php echo __('Loại lãi xuất')?><span class="text-danger">*</span></label>
 				<div class="col-sm-9">
-					<?php echo FvnHtml::select(FvnParamInvestType::getAll(),'data[type]','','value','display',$this->item->type,'data_type')?>
+					<?php echo FvnHtml::select(FvnParamVideoCallType::getAll(),'data[type]','','value','display',$this->item->type,'data_type')?>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -57,7 +57,7 @@ var rate_val = <?php echo json_encode($this->item->rate)?>;
 jQuery(document).ready(function($){
 	$('#data_type').change(function(){
 		var html = '';
-		if($(this).val()=='<?php echo FvnParamInvestType::MONTHLY['value']?>'){
+		if($(this).val()=='<?php echo FvnParamVideoCallType::MONTHLY['value']?>'){
 			html += '3 tháng: <input name="data[rate][3]" value="'+(rate_val[3]!=undefined?rate_val[3]:'')+'"><br>';
 			html += '6 tháng: <input name="data[rate][6]" value="'+(rate_val[6]!=undefined?rate_val[6]:'')+'"><br>';
 			html += '12 tháng: <input name="data[rate][12]" value="'+(rate_val[12]!=undefined?rate_val[12]:'')+'"><br>';

@@ -13,7 +13,7 @@
 		<td><?php echo __('For '.$displayData->order->purpose_of_visit);?></td>
 		<td><?php echo $displayData->airport->name?></td>
 		<td><?php echo $displayData->processing_time->name?></td>
-		<td><?php echo HBDateHelper::display($displayData->order->start).' '.$displayData->order->start_time?></td>
+		<td><?php echo FvnDateHelper::display($displayData->order->start).' '.$displayData->order->start_time?></td>
 		<td><?php echo $displayData->order->params['flight']['number']?></td>
 	</tr>
 </tbody></table>
