@@ -127,7 +127,7 @@ class FvnHtml
 	 * Create calendar html box
 	 */
 	static function calendar($value = null, $name,$id = null,$format,$attr = '',$options=null){
-		
+		self::add_datepicker_lib();
 		$id = $id ? 'id="'.$id.'"' : '';
 		echo '<input type="text" name="'.$name.'" '.$id.' '.$attr.' value="'.$value.'"/>';
 		$option_str = 'dateFormat: "'.$format.'"';
@@ -336,7 +336,7 @@ class FvnHtml
 		return wp_editor( $value, $id, $attr );
 	}
 
-	static function time_picker($name, $value,$id,$attr=null,$options=null){
+	static function timePicker($name,$attr=null,$value,$id, $options=null){
 		self::add_timepicker_lib();
 		if(!isset($options['showMeridian']))//format 24 gio
 			$options['showMeridian'] = false;
@@ -349,7 +349,7 @@ class FvnHtml
 							<input type="text" name="'.$name.'" id="'.$id.'" '.$attr.' value="'.$value.'"/>
 							<span class="add-on"><i class="icon-clock icon-black"></i></span>
 						</div>	';
-		return $script.$html;
+		return $html.$script;
 	}
 		
 	

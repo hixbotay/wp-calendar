@@ -11,8 +11,8 @@
 //namespace HB;
 defined('ABSPATH') or die('Restricted access');
 //Plugin root path
-define('FVN_PATH', plugin_dir_path(__DIR__).'fvn-invest/');
-define('FVN_URL',site_url().'/wp-content/plugins/fvn-invest/');
+define('FVN_PATH', __DIR__.'/');
+define('FVN_URL',site_url().'/wp-content/plugins/fvn-calendar/');
 if(!defined('DS')){
 	define('DS','/');
 }

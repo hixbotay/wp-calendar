@@ -1,6 +1,6 @@
 <?php 
-FvnImporter::model('investpackage','orders');
-FvnImporter::helper('currency', 'date','invest');
+FvnImporter::model('orders');
+FvnImporter::helper('currency', 'date');
 FvnHelper::checkLogin();
 
 $input = HBFactory::getInput();
@@ -17,9 +17,6 @@ add_filter('pre_get_document_title', function () {
 // wp_enqueue_style( 'visa', FVN_URL.'assets/css/visa.css', '', '1.0.0' );
 $user = HBFactory::getUser();
 
-if($total<$package->min_price || $day<1){
-	wp_die('404 NOT FOUND');
-}
 $payment_plugin = HBList::getPaymentAvailPlugin();
 $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
 // debug($payment_plugin);die;
@@ -32,16 +29,37 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
         <div class="content clearfix"></div>
         <hr>
         <div class="row">
+            <div class="col-sm-3">Họ và tên</div>
+            <div class="col-sm-9"><input class="form-control" required name="jform[name]" /></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Điện thoại liên hệ</div>
+            <div class="col-sm-9"><input type="tel" required class="form-control" name="jform[phone]" /></div>
+        </div>
+        <div class="row">
             <div class="col-sm-3">Chọn ngày</div>
-            <div class="col-sm-9"><?php echo FvnCurrencyHelper::displayPrice($total) ?></div>
+            <div class="col-sm-9"><?php FvnHtml::calendar('','jform[date]','date',FvnDateHelper::getConvertDateFormat(),'class="form-control" required')?></div>
         </div>
         <div class="row">
-            <div class="col-sm-3">Chọn thời gian bắt đầu</div>
-            <div class="col-sm-9"><?php echo FvnHtml::getTimmer()?></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-sm-6">Chọn thời gian bắt đầu</div>
+                    <div class="col-sm-6"><?php echo FvnHtml::timePicker('jform[start_time]','class="" style="width:100px"','','start_time')?></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-sm-6">Chọn thời gian kết thúc</div>
+                    <div class="col-sm-6"><?php echo FvnHtml::timePicker('jform[end_time]','class="" style="width:100px"','','end_time')?></div>
+                </div>
+            </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">Số tiền lãi dự tính</div>
-            <div class="col-sm-9"><?php echo FvnCurrencyHelper::displayPrice($result['revenue']).' + '.FvnCurrencyHelper::displayPrice($total).' = '.FvnCurrencyHelper::displayPrice($result['total'])?></div>
+            <div class="col-sm-3">Chọn loại hình liên hệ</div>
+            <div class="col-sm-9">
+                <?php echo FvnHtml::select(FvnParamVideoCallType::getAll(),'jform[type]','required class="form-control','value','display','','type','Chọn cách chúng tôi liên hệ với bạn')?>
+                <div id="type_desc" class="content"></div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-3">Chú ý</div>
@@ -58,7 +76,7 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
 							</p>
 							<?php }?>
         </div>
-				<pre id="payment_description"></pre>
+				<!-- <pre id="payment_description"></pre> -->
         <input type="hidden" name="jform[order_id]" value="<?php echo $input->getInt('order_id') ?>" />
         <input type="hidden" name="hbaction" value="order" />
         <input type="hidden" name="task" value="book" />

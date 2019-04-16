@@ -1,5 +1,5 @@
 <?php
-FvnImporter::helper('date','invest');
+FvnImporter::helper('date');
 class FvnModelOrders extends FvnModel{
 	public function __construct($table_name='#__fvn_orders', $primary_key = 'id'){
 		return parent::__construct($table_name, $primary_key);
