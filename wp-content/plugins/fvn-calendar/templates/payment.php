@@ -117,6 +117,7 @@ jQuery(document).ready(function($){
 
             //form.submit();
             displayProcessingForm(1);
+            displayProcessingForm(1);
             jQuery.ajax({
                 type: "POST",
                 url: '<?php echo site_url('/?hbaction=order&task=book') ?>',

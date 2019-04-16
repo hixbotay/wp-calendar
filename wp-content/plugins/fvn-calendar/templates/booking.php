@@ -32,12 +32,12 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
         <div class="content clearfix"></div>
         <hr>
         <div class="row">
-            <div class="col-sm-3">Số tiền đầu tư</div>
+            <div class="col-sm-3">Chọn ngày</div>
             <div class="col-sm-9"><?php echo FvnCurrencyHelper::displayPrice($total) ?></div>
         </div>
         <div class="row">
-            <div class="col-sm-3">Số ngày</div>
-            <div class="col-sm-9"><?php echo $day ?> ngày</div>
+            <div class="col-sm-3">Chọn thời gian bắt đầu</div>
+            <div class="col-sm-9"><?php echo FvnHtml::getTimmer()?></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Số tiền lãi dự tính</div>
