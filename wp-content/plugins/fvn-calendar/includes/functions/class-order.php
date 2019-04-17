@@ -20,8 +20,8 @@ class FvnActionOrder extends FvnAction{
 			$this->error = 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc';
 			return false;
 		}
-		if($data['start_time'] > !$data['end_time']){
-			$this->error = 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc';
+		if(!$data['type_desc']){
+			$this->error = 'Vui lòng điền địa chỉ '.FvnParamVideoCallType::getDisplay($data['type']);
 			return false;
 		}
 		$booked = FvnCalendarHelper::getBooked();

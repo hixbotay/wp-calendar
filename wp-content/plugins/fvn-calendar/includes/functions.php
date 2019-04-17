@@ -48,7 +48,7 @@ function hb_register_session(){
 add_action('init', 'hb_register_session');
 // Add hook for admin <head></head>
 function hbpro_add_head_script(){
-	echo '<script type="text/javascript">var siteURL="'.site_url().'";</script>';
+	echo '<script type="text/javascript">var siteURL="'.site_url().'"; var fvn_url="'.FVN_URL.'"</script>';
 }
 add_action('admin_head', 'hbpro_add_head_script');
 

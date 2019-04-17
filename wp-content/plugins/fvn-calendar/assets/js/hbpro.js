@@ -373,7 +373,7 @@ function format_date(date,format,convert){
 
 function display_processing_form(enable){
 	if(enable){
-		jQuery('body').append('<img id="jbform_loading"  style="position: fixed;top:50%;left: 50%;margin-left: -100px;margin-top: -100px;width:200px;height:200px;" src="/wp-content/plugins/visa-fvn/assets/images/loading.gif"/>');
+		jQuery('body').append('<img id="jbform_loading"  style="position: fixed;top:50%;left: 50%;margin-left: -100px;margin-top: -100px;width:200px;height:200px;" src="'+fvn_url+'assets/images/loading.gif"/>');
 
 	}else{
 		jQuery('#jbform_loading').remove();

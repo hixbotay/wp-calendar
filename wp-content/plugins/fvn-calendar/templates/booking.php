@@ -61,6 +61,7 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
                 <div id="type_desc" class="content"></div>
             </div>
         </div>
+        
         <div class="row">
             <div class="col-sm-3">Chú ý</div>
             <div class="col-sm-9"><textarea class="form-control" rows="15" name="data[notes]"></textarea></div>
@@ -105,7 +106,34 @@ jQuery(document).ready(function($){
                 }
             });
 	});
-	$('#payment_method_<?php echo $default_plugin?>').trigger('click');
+    // $('#payment_method_<?php echo $default_plugin?>').trigger('click');
+    $('#type').change(function(){
+        var social = $(this).val();
+        var html = '';
+        if(social=='<?php echo FvnParamVideoCallType::ZALO['value']?>'){
+            html .= 'Vui lòng điền số điện thoại bạn đang sử dụng zalo, chúng tôi sẽ liên hệ với bạn qua nick Zalo này<br>';
+            html .= '<input type="tel" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="Số điện thoại Zalo" />';
+        }
+        if(social=='<?php echo FvnParamVideoCallType::FACEBOOK['value']?>'){
+            html .= 'Vui lòng điền link facebook trang cá nhân của bạn chúng tôi sẽ liên hệ với bạn qua nick facebook đó.<br>';
+            html .= 'Đường link facebook của bạn sẽ có dạng https://facebook.com/xxx Trong đó xxx là nick của bạn. Vui lòng vào trang cá nhân của bạn và copy đường dẫn trên thanh địa chỉ trình duyệt.<br>';
+            html .= 'Bạn có thể tham khảo <a href="https://trangcongnghe.com/thu-thuat/138787-cach-lay-link-facebook-tren-dien-thoai.html">tại đây</a> để được hướng dẫn cụ thể hơn.';
+            html .= '<input type="text" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="https://facebook.com/xxx" value="https://facebook.com/"/>';
+        }
+        if(social=='<?php echo FvnParamVideoCallType::SKYPE['value']?>'){
+            var popup = '';
+            popup .= '<div class="row">';
+            popup .= '<div class="col-md-3"><img class="avatar" src="'+fvn_url+'assets/images/skype-buoc1.jpg"/></div>';
+            popup .= '<div class="col-md-3"><img class="avatar" src="'+fvn_url+'assets/images/skype-buoc2.jpg"/></div>';
+            popup .= '</div>';
+
+            html .= 'Vui lòng điền địa chỉ Skype của bạn <a href="javascript:void(0)" onclick="jAlert(popup)">Hướng dẫn</a><br>';
+            html .= '<input type="text" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="Tên skype"/>';
+            
+        }
+        $('#type_desc').html(html);
+    });
+
 });
     function submitForm() {
         var form = jQuery("#frontForm");
@@ -130,17 +158,17 @@ jQuery(document).ready(function($){
                             window.location = result.url;
                         } else {
                             displayProcessingForm(0);
-                            alert(result.error.msg);
+                            jAlert(result.error.msg);
                             return false;
                         }
                     } else {
                         displayProcessingForm(0);
-                        alert('<?php echo __('System error warn'); ?>');
+                        jAlert('<?php echo __('System error warn'); ?>');
                     }
                 },
-                error: function() {
+                error: function(e) {
                     displayProcessingForm(0);
-                    alert('<?php echo __('System error warn'); ?>');
+                    jAlert(e);
                 }
             });
         } else {
