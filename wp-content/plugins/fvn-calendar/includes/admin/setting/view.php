@@ -68,16 +68,16 @@ class FvnAdminViewSetting extends FvnAdminView {
 
 	public function emailTab() {
 		$input = HBFactory::getInput();
-		$active_tab = $input->getString('template','customer');
+		$active_tab = $input->getString('template','admin');
 		FvnImporter::helper('email');
 		?>
 		<h2 class="nav-tab-wrapper">
-			<a href="?page=setting&layout=notify&template=customer" class="nav-tab <?php echo $active_tab == 'customer' ? 'nav-tab-active' : ''; ?>">Gửi khách hàng</a>
-			<a href="?page=setting&layout=notify&template=payment" class="nav-tab <?php echo $active_tab == 'payment' ? 'nav-tab-active' : ''; ?>">Mail Thanh toán(chuyển khoản)</a>
+			<!-- <a href="?page=setting&layout=notify&template=customer" class="nav-tab <?php echo $active_tab == 'customer' ? 'nav-tab-active' : ''; ?>">Gửi khách hàng</a>
+			<a href="?page=setting&layout=notify&template=payment" class="nav-tab <?php echo $active_tab == 'payment' ? 'nav-tab-active' : ''; ?>">Mail Thanh toán(chuyển khoản)</a> -->
 			<a href="?page=setting&layout=notify&template=admin" class="nav-tab <?php echo $active_tab == 'admin' ? 'nav-tab-active' : ''; ?>">Gửi Admin</a>
-			<a href="?page=setting&layout=notify&template=new_drawrequest" class="nav-tab <?php echo $active_tab == 'new_drawrequest' ? 'nav-tab-active' : ''; ?>">Yêu cầu rút tiền</a>
+			<!-- <a href="?page=setting&layout=notify&template=new_drawrequest" class="nav-tab <?php echo $active_tab == 'new_drawrequest' ? 'nav-tab-active' : ''; ?>">Yêu cầu rút tiền</a>
 			<a href="?page=setting&layout=notify&template=approve_drawrequest" class="nav-tab <?php echo $active_tab == 'approve_drawrequest' ? 'nav-tab-active' : ''; ?>">Rút tiền thành công</a>
-			<a href="?page=setting&layout=notify&template=reject_drawrequest" class="nav-tab <?php echo $active_tab == 'reject_drawrequest' ? 'nav-tab-active' : ''; ?>">Rút tiền thất bại</a>
+			<a href="?page=setting&layout=notify&template=reject_drawrequest" class="nav-tab <?php echo $active_tab == 'reject_drawrequest' ? 'nav-tab-active' : ''; ?>">Rút tiền thất bại</a> -->
 		</h2>
 		<div><b>Một số tag: </b>
 		<?php $keys = FvnMailHelper::getOrderKey();

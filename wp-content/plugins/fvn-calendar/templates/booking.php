@@ -1,7 +1,6 @@
 <?php 
 FvnImporter::model('orders');
 FvnImporter::helper('currency', 'date');
-FvnHelper::checkLogin();
 
 $input = HBFactory::getInput();
 if($input->getInt('order_id')){
@@ -37,8 +36,12 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
             <div class="col-sm-9"><input type="tel" required class="form-control" name="jform[phone]" /></div>
         </div>
         <div class="row">
+            <div class="col-sm-3">Giới tính</div>
+            <?php echo FvnHtml::select(FvnParamGender::getAll(),'jform[gender]','required class="form-control','value','display',FvnParamGender::MALE['value'],'type')?>
+        </div>
+        <div class="row">
             <div class="col-sm-3">Chọn ngày</div>
-            <div class="col-sm-9"><?php FvnHtml::calendar('','jform[date]','date',FvnDateHelper::getConvertDateFormat(),'class="form-control" required')?></div>
+            <div class="col-sm-9"><?php FvnHtml::calendar('','jform[start]','date',FvnDateHelper::getConvertDateFormat(),'class="form-control" required')?></div>
         </div>
         <div class="row">
             <div class="col-md-6">

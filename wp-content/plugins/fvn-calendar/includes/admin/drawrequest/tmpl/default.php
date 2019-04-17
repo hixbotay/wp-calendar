@@ -13,8 +13,8 @@ FvnImporter::helper('currency','invest');
 ?>
 <form action="admin.php" action="GET" id="adminForm" name="adminForm">
 <div class="wrap">
-	<h1><?php echo __("Lệnh rút tiền")?>
-	<!-- <a href="<?php echo admin_url('admin.php?page=drawrequest&layout=edit')?>" class="page-title-action"><?php echo __("Add")?></a> -->
+	<h1><?php echo __("Lịch hẹn")?>
+	
 	</h1>
 
 	<div class="tablenav top">
@@ -34,31 +34,26 @@ FvnImporter::helper('currency','invest');
 			<table class="wp-list-table widefat fixed striped posts">
 				<thead>
 					<tr>
-						<th>Mã giao dịch</th>
-						<th>Gói đầu tư</th>
-						<th>Người dùng</th>
-						<th>Số tiền đầu tư</th>
-						<th>Tổng tiền</th>
-						<th>Thao tác</th>
+						<th>Ngày</th>
+						<th>Thời gian</th>
+						<th>Tên</th>
+						<th>Điện thoại</th>
+						<th>Liên hệ</th>
+						<th>Giới tính</th>
+						<th>Chú ý</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($this->items as $item){?>
 						<tr>
-						<td><?php echo $item->order_number;?></td> 
-						<td><?php echo $item->invest_name?></td>
-						<td><?php echo $item->user_name;?></td>
-						<td><?php echo FvnCurrencyHelper::displayPrice($item->total);?></td>
-						<td><?php echo FvnCurrencyHelper::displayPrice(FvnInvestHelper::caculateDrawAble($item)['total']);?></td>
-						<td>
-							<?php if($item->status=="PENDING"){?>
-								<a href="javascript:void(0)" class="fvn-function" data-ask="1" data-href="<?php echo admin_url('admin.php?fvnaction=drawrequest&task=approve&id='.$item->id)?>"><?php echo __('Đồng ý')?></a>|
-								<a href="javascript:void(0)" class="fvn-function" data-ask="1" data-href="<?php echo admin_url('admin.php?fvnaction=drawrequest&task=reject&id='.$item->id)?>"><?php echo __('Không đồng ý')?></a>
-							<?php }else{
-								echo $item->status;
-							}?>
-							
-						</td>
+						<td><?php echo $item->start;?></td> 
+						<td><?php echo $item->start_time.'-'.$item->end_time?></td>
+						<td><?php echo $item->name;?></td>
+						<td><?php echo $item->phone;?></td>
+						<td><?php echo FvnParamVideoCallType::getDisplay($item->type).' '.$item->type_desc;?></td>
+						<td><?php FvnParamGender::getDisplay($item->gender);?></td>
+						<td><?php echo $item->notes;?></td>
+						
 					</tr>
 					<?php }?>
 				</tbody>

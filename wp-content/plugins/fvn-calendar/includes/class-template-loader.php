@@ -46,7 +46,7 @@ class HB_Template_Loader
 				$file = 'user-orders.php';
 				break;
 			case 'orderdetail':
-				$file = 'user-order-detail.php';
+				$file = 'order-detail.php';
 				break;			
 			case 'profile':
 				$file = 'user-profile.php';

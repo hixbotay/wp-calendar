@@ -61,7 +61,7 @@ class HbPayment_Cash
 	function _prePayment( )
 	{
 		$this->order->pay_method = 'cash';
-		$this->order->order_status = 'CONFIRMED';
+		$this->order->order_status = FvnParamOrderStatus::CONFIRMED['value'];
 		$result = array();
 		if($this->order->store()){			
 			$result['status']=1;

@@ -12,7 +12,7 @@ FvnImporter::helper('calendar');
 class FvnActionOrder extends FvnAction{
 
 	private function validateOrder($data){]
-		if(!$data['date'] || !$data['start_time'] || !$data['end_time']){
+		if(!$data['start'] || !$data['start_time'] || !$data['end_time']){
 			$this->error = 'Vui lòng điền thời gian đặt lịch hẹn';
 			return false;
 		}
@@ -76,7 +76,7 @@ class FvnActionOrder extends FvnAction{
 			}else{
 				$config = HBFactory::getConfig();			
 				
-				$data['start'] = FvnDateHelper::createFromFormatYmd($data['date']);	
+				$data['start'] = FvnDateHelper::createFromFormatYmd($data['start']);	
 				$data['user_id'] = $user->id;
 				$data['pay_status']= FvnParamPayStatus::PENDING['value'];
 				$data['order_status']= FvnParamOrderStatus::PENDING['value'];
@@ -91,8 +91,8 @@ class FvnActionOrder extends FvnAction{
 				if($check){
 					$result['status'] = 1;
 					$result['order_id'] = $order->id;
-					// $result['url'] = site_url('/?hbaction=payment&task=process&order_id='.$order->id.'&pay_method='.$this->input->get('pay_method'));
-					$result['url'] = FvnHelper::get_order_link($order);
+					$result['url'] = site_url('/?hbaction=payment&task=process&order_id='.$order->id.'&pay_method='.$this->input->get('pay_method','offline'));
+					// $result['url'] = FvnHelper::get_order_link($order);
 				}else{
 					$result['error']['msg'] = $wpdb->last_error;					
 				}

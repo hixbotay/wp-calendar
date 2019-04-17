@@ -58,7 +58,10 @@ class HBFactory {
 		
 		FvnImporter::helper('debug','html','list','helper');
 		FvnImporter::includes('functions','widget-functions');
-		FvnImporter::params('base','orderstatus','paystatus','videocall');
+		FvnImporter::params('base','orderstatus','paystatus','gender');
+		//customize import
+		FvnImporter::params('videocall');
+		FvnImporter::helper('calendar');
 		//import require file only for admin sie
 		if(is_admin()){
 			FvnImporter::includes(

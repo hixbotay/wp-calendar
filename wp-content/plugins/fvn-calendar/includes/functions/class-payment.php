@@ -124,7 +124,7 @@ class FvnActionPayment extends FvnAction{
 		FvnImporter::model('orders');
 		FvnImporter::helper('currency','email');
 		$mail = new FvnMailHelper($order_id);
-		$mail->sendCustomer();
+		// $mail->sendCustomer();
         $mail->sendAdmin();        
 	}	
 	//send mail via post curl

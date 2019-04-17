@@ -26,13 +26,10 @@ class FvnModelOrders extends FvnModel{
 	protected function getQueries(){
 		$query = HBFactory::getQuery();
 		$query->select('o.*,p.name as invest_name,u.display_name as user_display_name,um.meta_value as user_phone')
-		->from('#__fvn_orders as o')
-		->leftJoin('#__users as u ON u.ID = o.user_id')
-		->leftJoin('#__usermeta as um ON u.ID = um.user_id AND um.meta_key="phone"')
-		->leftJoin('#__fvn_invest_package as p ON o.invest_package_id = p.id');
+		->from('#__fvn_orders as o');
 		if($this->getState('filter_title')){
 			$search = '%'.$this->getState('filter_title').'%';
-			$query->where('u.display_name LIKE '.$query->quote($search).' OR order_number LIKE '.$query->quote($search).' OR mobile LIKE '.$query->quote($search).' 
+			$query->where('order_number LIKE '.$query->quote($search).' OR phone LIKE '.$query->quote($search).' 
 					OR email LIKE '.$query->quote($search).')');
 		}
 		if($this->getState('filter_date')){
@@ -44,9 +41,7 @@ class FvnModelOrders extends FvnModel{
 		if($this->getState('filter_pay_status')){
 			$query->where('o.pay_status = '.$this->quote($this->getState('filter_pay_status')));
 		}
-		if($this->getState('filter_private_later')!=''&&$this->getState('filter_private_later')!=null){
-			$query->where('o.private_later = '.(int)$this->getState('private_later'));
-		}
+		
 		if($this->getState('filter_user_id')){
 			$query->where('o.user_id = '.(int)$this->getState('filter_user_id'));
 		}
@@ -59,7 +54,7 @@ class FvnModelOrders extends FvnModel{
 		$query = HBFactory::getQuery();
 		global $wpdb;
 
-		$query->select('o.id,o.start,o.start_time,o.end_time')
+		$query->select('o.*')
 		->from('#__fvn_orders as o');
 		$query->where('o.start >= '.date('Y-m-d'));
 		$query->where('o.order_status = '.FvnParamOrderStatus::CONFIRMED['value']);
