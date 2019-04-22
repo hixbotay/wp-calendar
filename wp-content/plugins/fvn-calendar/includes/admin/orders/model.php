@@ -25,7 +25,7 @@ class FvnModelOrders extends FvnModel{
 	
 	protected function getQueries(){
 		$query = HBFactory::getQuery();
-		$query->select('o.*,p.name as invest_name,u.display_name as user_display_name,um.meta_value as user_phone')
+		$query->select('o.*')
 		->from('#__fvn_orders as o');
 		if($this->getState('filter_title')){
 			$search = '%'.$this->getState('filter_title').'%';

@@ -46,15 +46,14 @@ FvnImporter::helper('currency','invest');
 				<tbody>
 					<?php foreach ($this->items as $item){?>
 						<tr>
-						<td><?php echo $item->start;?></td> 
-						<td><?php echo $item->start_time.'-'.$item->end_time?></td>
-						<td><?php echo $item->name;?></td>
-						<td><?php echo $item->phone;?></td>
-						<td><?php echo FvnParamVideoCallType::getDisplay($item->type).' '.$item->type_desc;?></td>
-						<td><?php FvnParamGender::getDisplay($item->gender);?></td>
-						<td><?php echo $item->notes;?></td>
-						
-					</tr>
+							<td><?php echo $item->start;?></td> 
+							<td><?php echo $item->start_time.'-'.$item->end_time?></td>
+							<td><?php echo $item->name;?></td>
+							<td><?php echo $item->phone;?></td>
+							<td><?php echo FvnParamVideoCallType::getDisplay($item->type).' <br><pre style="font-size:10px">'.$item->type_desc.'</pre>';?></td>
+							<td><?php FvnParamGender::getDisplay($item->gender);?></td>
+							<td><?php echo $item->notes;?></td>							
+						</tr>
 					<?php }?>
 				</tbody>
 			</table>
