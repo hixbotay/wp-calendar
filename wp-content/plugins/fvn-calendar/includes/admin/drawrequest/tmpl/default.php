@@ -17,7 +17,7 @@ FvnImporter::helper('currency','invest');
 	
 	</h1>
 
-	<div class="tablenav top">
+	<!-- <div class="tablenav top">
 		
 		<div class="alignleft actions">
 			<?php echo FvnHtml::text('filter_title', '',$this->input->get('filter_title'))?>
@@ -26,7 +26,7 @@ FvnImporter::helper('currency','invest');
 		</div>
 
 		<br class="clear">
-	</div>
+	</div> -->
 
 
 	<div>
