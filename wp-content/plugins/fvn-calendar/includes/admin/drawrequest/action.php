@@ -1,5 +1,4 @@
 <?php
-FvnImporter::helper('invest');
 class FvnActionDrawRequest extends FvnAction{	
     
     public function approve(){        

@@ -20,6 +20,10 @@ class FvnActionOrder extends FvnAction{
 			$this->error = 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc';
 			return false;
 		}
+		if(!$data['type']){
+			$this->error = 'Vui lòng chọn một loại hình liên hệ';
+			return false;
+		}
 		if(!$data['type_desc']){
 			$this->error = 'Vui lòng điền địa chỉ '.FvnParamVideoCallType::getDisplay($data['type']);
 			return false;

@@ -1,6 +1,6 @@
 <?php 
 FvnImporter::model('investpackage','orders');
-FvnImporter::helper('currency', 'date','invest');
+FvnImporter::helper('currency', 'date');
 FvnHelper::checkLogin();
 
 $input = HBFactory::getInput();

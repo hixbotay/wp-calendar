@@ -1,6 +1,6 @@
 <?php
 FvnImporter::model('transaction');
-FvnImporter::helper('math','invest','currency','date');
+FvnImporter::helper('math','currency','date');
 FvnHelper::checkLogin();
 
 $model = new FvnModelTransaction();

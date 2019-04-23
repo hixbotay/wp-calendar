@@ -9,7 +9,7 @@
  **/
 // die('ddfdf');
 defined('ABSPATH') or die('Restricted access');
-FvnImporter::helper('currency','date','orderstatus','paystatus','params','invest');
+FvnImporter::helper('currency','date','orderstatus','paystatus','params');
 global $wpdb;
 $total = $wpdb->get_var("SELECT count(1) FROM {$wpdb->prefix}fvn_orders");
 $paid_count = $wpdb->get_var("SELECT count(1) FROM {$wpdb->prefix}fvn_orders WHERE pay_status = 'SUCCESS'");

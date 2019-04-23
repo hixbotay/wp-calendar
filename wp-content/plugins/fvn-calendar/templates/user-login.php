@@ -1,6 +1,6 @@
 
 <?php
-FvnImporter::helper('math', 'invest','html','date');
+FvnImporter::helper('math','html','date');
 FvnHtml::add_datepicker_lib();
 $user = HBFactory::getUser();
 if($user->id){

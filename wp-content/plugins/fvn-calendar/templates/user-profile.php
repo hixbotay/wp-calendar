@@ -1,6 +1,6 @@
 <?php
 FvnImporter::model('orders');
-FvnImporter::helper('math', 'invest','date','currency');
+FvnImporter::helper('math','date','currency');
 FvnHtml::add_datepicker_lib();
 $user = HBFactory::getUser();
  //debug($user);

@@ -268,7 +268,7 @@ ul.style-step li.active {
 }
 
 .fvn-popup {
-  margin: 70px auto;
+  margin: 200px auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
@@ -304,6 +304,8 @@ ul.style-step li.active {
   
   .fvn-popup{
     width: 70%;
+    margin: 200px auto;
   }
+    
 }
 /*end pop up*/

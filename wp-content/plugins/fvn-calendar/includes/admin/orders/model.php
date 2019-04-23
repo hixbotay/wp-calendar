@@ -42,9 +42,9 @@ class FvnModelOrders extends FvnModel{
 			$query->where('o.pay_status = '.$this->quote($this->getState('filter_pay_status')));
 		}
 		
-		if($this->getState('filter_user_id')){
-			$query->where('o.user_id = '.(int)$this->getState('filter_user_id'));
-		}
+		// if($this->getState('filter_user_id')){
+		// 	$query->where('o.user_id = '.(int)$this->getState('filter_user_id'));
+		// }
 		
 		$query->order('id DESC');
 		return $query;		
