@@ -22,12 +22,9 @@ class HB_Menu {
 	
 	public static function admin_menu() {	
 		
-		add_menu_page( __('Yêu cầu đầu tư'), __('Yêu cầu đầu tư'), 'edit_posts', 'orders',  array( get_called_class(), 'booking' ), FVN_URL.'assets/images/logo.png', 5 );	
+		add_menu_page( __('Yêu cầu mới'), __('Yêu cầu mới'), 'edit_posts', 'orders',  array( get_called_class(), 'booking' ), FVN_URL.'assets/images/logo.png', 5 );	
 			
-		add_submenu_page( 'orders', __('Lệnh rút tiền'), __('Lệnh rút tiền'),'edit_posts', 'drawrequest',  array( get_called_class(), 'drawrequest' ), FVN_URL.'assets/images/booking.png', 5 );
-		add_submenu_page( 'orders', __('Lịch sử giao dịch'), __('Lịch sử giao dịch'),'edit_posts', 'transaction',  array( get_called_class(), 'transaction' ), FVN_URL.'assets/images/booking.png', 5 );
-		add_submenu_page( 'orders', __('Gói đầu tư'), __('Gói đầu tư'),'edit_posts', 'investpackage',  array( get_called_class(), 'investpackage' ), FVN_URL.'assets/images/booking.png', 5 );
-		// add_submenu_page( 'orders', __('Airport'), __('Airport'),'edit_posts', 'airport',  array( get_called_class(), 'airport' ), FVN_URL.'assets/images/booking.png', 5 );
+		add_submenu_page( 'orders', __('Lịch hẹn'), __('Lịch hẹn'),'edit_posts', 'drawrequest',  array( get_called_class(), 'drawrequest' ), FVN_URL.'assets/images/booking.png', 5 );
 		add_submenu_page( 'orders', __('Setting'), __('Setting'),'manage_options', 'setting',  array( get_called_class(), 'dashboard' ), FVN_URL.'assets/images/booking.png', 5 );
 		
 	}

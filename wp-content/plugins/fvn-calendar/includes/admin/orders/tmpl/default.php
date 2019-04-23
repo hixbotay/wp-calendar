@@ -77,15 +77,15 @@ if ($this->input->get('pay') == 'pending'){
                         <input id="cb-select-all-1" type="checkbox" onclick="toggle(this)">
                     </th>
                      -->
-					<th><?php echo __('Order number')?></th>
-					<th><?php echo __('Full name')?></th>
-					<th><?php echo __('Arrival date')?></th>
-					<th><?php echo __('Pay status')?></th>
-                    <th><?php echo __('Order status')?></th>
-                    <th><?php echo __('Total')?></th>
-                    <th><?php echo __('Lãi xuất')?></th>
-					<th><?php echo __('Mobile')?></th>
-					<th><?php echo __('Created')?></th>
+					<th><?php echo __('Mã đặt lịch')?></th>
+					<th><?php echo __('Họ tên')?></th>
+					<th><?php echo __('Số đt')?></th>
+					<th><?php echo __('Email')?></th>
+                    <th><?php echo __('Trạng thái')?></th>
+					<th><?php echo __('Ngày đặt')?></th>
+                    <th><?php echo __('Thời gian bắt đầu')?></th>
+					<th><?php echo __('Kết thúc')?></th>
+					<th><?php echo __('Ngày tạo')?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -111,9 +111,6 @@ if ($this->input->get('pay') == 'pending'){
 
                         ?>
 					<tr>
-                        <!-- <td>
-                            <input id="cb-select-<?php echo $item->id; ?>" type="checkbox" name="id[]" value="<?php echo $item->id; ?>"></td>
-                             -->
 						<td>
 						
 							<a target="_blank" href="<?php echo FvnHelper::get_order_link($item)?>"><?php echo $item->order_number;?></a>
@@ -126,8 +123,8 @@ if ($this->input->get('pay') == 'pending'){
 						</td>
                         
 						<td><?php echo $item->user_display_name;?></td>
-						<td><?php echo FvnDateHelper::display($item->start)?></td>
-						<td><span <?php echo $color?>><?php echo FvnParamPayStatus::getDisplay($item->pay_status)?></span></td>
+                        <td><a href="tel:<?php echo $item->phone;?>"><?php echo $item->phone;?></a></td>
+                        <td><a href="tel:<?php echo $item->email;?>"><?php echo $item->email;?></a></td>
                         <td <?php echo $order_color; ?> >
                             <?php echo FvnParamOrderStatus::getDisplay($item->order_status);?>
                             <?php if ($item->order_status == 'PENDING'): ?>
@@ -137,10 +134,10 @@ if ($this->input->get('pay') == 'pending'){
                             </div>
                             <?php endif; ?>
                         </td>
-                        <td><?php echo FvnCurrencyHelper::displayPrice($item->total)?></td>
-                        <td>+<?php echo FvnCurrencyHelper::displayPrice(FvnInvestHelper::caculateDrawAble($item,true)['revenue'])?></td>
-						<td><a href="tel:<?php echo $item->user_phone;?>"><?php echo $item->user_phone;?></a></td>
-						<td><?php echo $item->created;?></td>
+                        <td><?php echo FvnDateHelper::display($item->start)?></td>
+                        <td><?php echo FvnDateHelper::formatHours($item->start_time)?></td>
+                        <td><?php echo FvnDateHelper::formatHours($item->end_time)?></td>
+						<td><?php echo FvnDateHelper::display($item->created,'d/m/Y H:i');?></td>
 					</tr>
 				<?php }?>
 			</tbody>
