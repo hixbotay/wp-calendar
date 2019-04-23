@@ -51,6 +51,7 @@ function hbpro_add_head_script(){
 	echo '<script type="text/javascript">var siteURL="'.site_url().'"; var fvn_url="'.FVN_URL.'"</script>';
 }
 add_action('admin_head', 'hbpro_add_head_script');
+add_action('wp_head', 'hbpro_add_head_script');
 
 function hbpro_plg_scripts() {
 	wp_enqueue_script( 'hbpro-plg-js', FVN_URL.'assets/js/hbpro.js', array('jquery'), '1.0.0', true );

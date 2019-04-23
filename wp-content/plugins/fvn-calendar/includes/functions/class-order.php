@@ -11,12 +11,12 @@ defined('ABSPATH') or die('Restricted access');
 FvnImporter::helper('calendar');
 class FvnActionOrder extends FvnAction{
 
-	private function validateOrder($data){]
+	private function validateOrder($data){
 		if(!$data['start'] || !$data['start_time'] || !$data['end_time']){
 			$this->error = 'Vui lòng điền thời gian đặt lịch hẹn';
 			return false;
 		}
-		if($data['start_time'] >= !$data['end_time']){
+		if($data['start_time'] >= $data['end_time']){
 			$this->error = 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc';
 			return false;
 		}
@@ -63,16 +63,14 @@ class FvnActionOrder extends FvnAction{
 		
 		$data = $this->input->get('jform',array());
 		global $wpdb;
-		$user = HBFactory::getUser();
+		// $user = HBFactory::getUser();
 		try{
 			$order = new FvnModelOrders();
-			if(!$user->id){
-				throw new Exception('Vui lòng đăng nhập');
-			}
+			
 			if($data['order_id']){
 				$result['order_id'] = $data['order_id'];
 				$result['status'] = 1;
-				$result['url'] = site_url('/?hbaction=payment&task=process&order_id='.$data['order_id'].'&pay_method='.$this->input->get('pay_method'));
+				$result['url'] = site_url('/?hbaction=payment&task=process&order_id='.$data['order_id'].'&pay_method='.$this->input->get('pay_method','cash'));
 			}else{
 				$config = HBFactory::getConfig();			
 				
@@ -83,7 +81,9 @@ class FvnActionOrder extends FvnAction{
 				$data['currency'] = $config->main_currency;
 
 				if(!$this->validateOrder($data)){
-					throw new Exception($this->error_msg);
+					$result['error']['msg'] = $this->error;
+					echo $this->renderJson($result);
+					exit;
 				}
 
 				$check = $order->save($data);		
@@ -91,7 +91,7 @@ class FvnActionOrder extends FvnAction{
 				if($check){
 					$result['status'] = 1;
 					$result['order_id'] = $order->id;
-					$result['url'] = site_url('/?hbaction=payment&task=process&order_id='.$order->id.'&pay_method='.$this->input->get('pay_method','offline'));
+					$result['url'] = site_url('/?hbaction=payment&task=process&order_id='.$order->id.'&pay_method='.$this->input->get('pay_method','cash'));
 					// $result['url'] = FvnHelper::get_order_link($order);
 				}else{
 					$result['error']['msg'] = $wpdb->last_error;					

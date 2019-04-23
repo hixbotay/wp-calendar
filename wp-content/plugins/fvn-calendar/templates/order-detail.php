@@ -1,5 +1,5 @@
 <?php 
-FvnImporter::model('orders');
+FvnImporter::model('orders'); 
 FvnImporter::helper('currency', 'date');
 
 $input = HBFactory::getInput();
@@ -10,6 +10,8 @@ add_filter('pre_get_document_title', function () {
 	return 'Chi tiết lịch hẹn ' . $package->name;
 });
 ?>
+<?php get_header(); ?>
+
 <div class="row">
     <div class="col-sm-3">Họ và tên</div>
     <div class="col-sm-9"><?php echo $order->order->name?></div>
@@ -23,18 +25,12 @@ add_filter('pre_get_document_title', function () {
     <div class="col-sm-9"><?php echo $order->order->start?></div>
 </div>
 <div class="row">
-    <div class="col-md-6">
-        <div class="row">
-            <div class="col-sm-6">Thời gian bắt đầu</div>
-            <div class="col-sm-6"><?php echo $order->order->start_time?></div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="row">
-            <div class="col-sm-6">Thời gian kết thúc</div>
-            <div class="col-sm-6"><?php echo $order->order->end_time?></div>
-        </div>
-    </div>
+    <div class="col-sm-3">Thời gian bắt đầu</div>
+    <div class="col-sm-9"><?php echo $order->order->start_time?></div>
+</div>
+<div class="row">
+    <div class="col-sm-3">Thời gian kết thúc</div>
+    <div class="col-sm-9"><?php echo $order->order->end_time?></div>
 </div>
 <div class="row">
     <div class="col-sm-3">Liên hệ qua</div>
@@ -52,3 +48,5 @@ add_filter('pre_get_document_title', function () {
     <div class="col-sm-3">Trạng thái</div>
     <div class="col-sm-9"><?php echo FvnParamOrderStatus::getDisplay($order->order->order_status)?></div>
 </div>
+
+<?php get_footer(); ?> 

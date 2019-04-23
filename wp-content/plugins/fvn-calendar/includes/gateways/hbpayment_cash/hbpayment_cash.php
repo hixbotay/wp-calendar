@@ -65,7 +65,7 @@ class HbPayment_Cash
 		$result = array();
 		if($this->order->store()){			
 			$result['status']=1;
-			$result['url'] = site_url('index.php?fvnaction=payment&task=confirm&order_id='.$this->order->id.'&method=cash&token='.$this->order->order_number);
+			$result['url'] = site_url('index.php?hbaction=payment&task=confirm&order_id='.$this->order->id.'&method=cash&token='.$this->order->order_number);
 			hb_enqueue_message(__('Booking success'));
 		}else{
 			$result['status']=0;

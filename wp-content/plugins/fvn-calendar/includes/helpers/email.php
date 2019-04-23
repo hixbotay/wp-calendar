@@ -111,7 +111,6 @@ class FvnMailHelper{
 		}
 		$link = FvnHelper::get_order_link($this->order_complex->order);		
 		$input = str_replace('{link}', $link, $input);
-		$draw_able = FvnInvestHelper::caculateDrawAble($this->order);
 		$input = str_replace('{revenue}', $draw_able['revenue'], $input);
 		$input = str_replace('{total_revenue}', $draw_able['total'], $input);
 		// $input = str_replace('{order_info}', FvnHelper::renderLayout('email_order_info',$this->order_complex), $input);

@@ -50,7 +50,7 @@ class FvnModelOrders extends FvnModel{
 		return $query;		
 	}
 
-	function getBookedCalendar(){
+	function getBooked(){
 		$query = HBFactory::getQuery();
 		global $wpdb;
 

@@ -58,7 +58,7 @@ class HBFactory {
 		
 		FvnImporter::helper('debug','html','list','helper');
 		FvnImporter::includes('functions','widget-functions');
-		FvnImporter::params('base','orderstatus','paystatus','gender');
+		FvnImporter::params('orderstatus','paystatus','gender');
 		//customize import
 		FvnImporter::params('videocall');
 		FvnImporter::helper('calendar');

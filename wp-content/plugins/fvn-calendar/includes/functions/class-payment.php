@@ -92,20 +92,27 @@ class FvnActionPayment extends FvnAction{
 		FvnImporter::model('orders');		
 		do_action('hb_order_process_execute_before');		
 		$plugin = $this->input->getString('method');
+		if(substr($plugin,0,10)=='hbpayment_'){
+			$plugin = substr($payment_plugin,10);
+			// echo $payment_plugin;die;
+		}
+		$plugin = 'hbpayment_'.$plugin;
+
 		$config = HBFactory::getConfig();
 		//check order da dc thanh toan lan nao chua de add transaction
 		// $original_order = (new FvnModelOrders())->getItem($this->input->get)
 		$payment = new $plugin();	
 		$payment->config = $config;
 		$payment->order = new FvnModelOrders();
+		$payment->order->load($this->input->get('order_id'));
 		$results = $payment->_postPayment();
 		/// Send email
-		
+		// debug($results);die;
 		if($results){
 			if(!isset($results->sendemail)){
 				//send email
 				if($config->allow_curl){
-					$url = site_url().'index.php?fvnaction=payment&task=urlsendmail&order_id='.$results->id;
+					$url = site_url().'index.php?hbaction=payment&task=urlsendmail&order_id='.$results->id;
 					FvnHelper::pingUrl($url);
 				}else{
 					$this->sendMail($results->id);
@@ -113,7 +120,8 @@ class FvnActionPayment extends FvnAction{
 			}
 		}		
 		do_action('hb_order_process_execute_after',$results);
-		if($results->order_status=='CONFIRMED'){
+		// die;
+		if($results->order_status==FvnParamOrderStatus::CONFIRMED['value']){
 			wp_redirect(FvnHelper::get_order_link($results));
 		}else{			
 			wp_redirect('index.php?view=message');

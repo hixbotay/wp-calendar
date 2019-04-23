@@ -37,11 +37,11 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
         </div>
         <div class="row">
             <div class="col-sm-3">Giới tính</div>
-            <?php echo FvnHtml::select(FvnParamGender::getAll(),'jform[gender]','required class="form-control','value','display',FvnParamGender::MALE['value'],'type')?>
+            <div class="col-sm-9"><?php echo FvnHtml::select(FvnParamGender::getAll(),'jform[gender]','required class="form-control"','value','display',FvnParamGender::MALE['value'],'gender')?></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Chọn ngày</div>
-            <div class="col-sm-9"><?php FvnHtml::calendar('','jform[start]','date',FvnDateHelper::getConvertDateFormat(),'class="form-control" required')?></div>
+            <div class="col-sm-9"><?php FvnHtml::calendar('','jform[start]','date',FvnDateHelper::getConvertDateFormat('J'),'class="form-control" required')?></div>
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -60,7 +60,7 @@ $default_plugin = $input->get('payment_method',reset($payment_plugin)->name);
         <div class="row">
             <div class="col-sm-3">Chọn loại hình liên hệ</div>
             <div class="col-sm-9">
-                <?php echo FvnHtml::select(FvnParamVideoCallType::getAll(),'jform[type]','required class="form-control','value','display','','type','Chọn cách chúng tôi liên hệ với bạn')?>
+                <?php echo FvnHtml::select(FvnParamVideoCallType::getAll(),'jform[type]','required class="form-control"','value','display','','type','Chọn cách chúng tôi liên hệ với bạn')?>
                 <div id="type_desc" class="content"></div>
             </div>
         </div>
@@ -113,39 +113,46 @@ jQuery(document).ready(function($){
     $('#type').change(function(){
         var social = $(this).val();
         var html = '';
-        if(social=='<?php echo FvnParamVideoCallType::ZALO['value']?>'){
-            html .= 'Vui lòng điền số điện thoại bạn đang sử dụng zalo, chúng tôi sẽ liên hệ với bạn qua nick Zalo này<br>';
-            html .= '<input type="tel" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="Số điện thoại Zalo" />';
+        if(social==<?php echo FvnParamVideoCallType::ZALO['value']?>){
+            html += 'Vui lòng điền số điện thoại bạn đang sử dụng zalo, chúng tôi sẽ liên hệ với bạn qua nick Zalo này<br>';
+            html += '<input type="tel" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="Số điện thoại Zalo" />';
         }
-        if(social=='<?php echo FvnParamVideoCallType::FACEBOOK['value']?>'){
-            html .= 'Vui lòng điền link facebook trang cá nhân của bạn chúng tôi sẽ liên hệ với bạn qua nick facebook đó.<br>';
-            html .= 'Đường link facebook của bạn sẽ có dạng https://facebook.com/xxx Trong đó xxx là nick của bạn. Vui lòng vào trang cá nhân của bạn và copy đường dẫn trên thanh địa chỉ trình duyệt.<br>';
-            html .= 'Bạn có thể tham khảo <a href="https://trangcongnghe.com/thu-thuat/138787-cach-lay-link-facebook-tren-dien-thoai.html">tại đây</a> để được hướng dẫn cụ thể hơn.';
-            html .= '<input type="text" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="https://facebook.com/xxx" value="https://facebook.com/"/>';
+        if(social==<?php echo FvnParamVideoCallType::FACEBOOK['value']?>){
+            html += 'Vui lòng điền link facebook trang cá nhân của bạn chúng tôi sẽ liên hệ với bạn qua nick facebook đó.<br>';
+            html += 'Đường link facebook của bạn sẽ có dạng https://facebook.com/xxx Trong đó xxx là nick của bạn. Vui lòng vào trang cá nhân của bạn và copy đường dẫn trên thanh địa chỉ trình duyệt.<br>';
+            html += 'Bạn có thể tham khảo <a href="https://trangcongnghe.com/thu-thuat/138787-cach-lay-link-facebook-tren-dien-thoai.html">tại đây</a> để được hướng dẫn cụ thể hơn.';
+            html += '<input type="text" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="https://facebook.com/xxx" value="https://facebook.com/"/>';
         }
-        if(social=='<?php echo FvnParamVideoCallType::SKYPE['value']?>'){
-            var popup = '';
-            popup .= '<div class="row">';
-            popup .= '<div class="col-md-3"><img class="avatar" src="'+fvn_url+'assets/images/skype-buoc1.jpg"/></div>';
-            popup .= '<div class="col-md-3"><img class="avatar" src="'+fvn_url+'assets/images/skype-buoc2.jpg"/></div>';
-            popup .= '</div>';
+        if(social==<?php echo FvnParamVideoCallType::SKYPE['value']?>){
+            
 
-            html .= 'Vui lòng điền địa chỉ Skype của bạn <a href="javascript:void(0)" onclick="jAlert(popup)">Hướng dẫn</a><br>';
-            html .= '<input type="text" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="Tên skype"/>';
+            html += 'Vui lòng điền địa chỉ Skype của bạn <a href="javascript:void(0)" onclick="return show_skype_form();">Hướng dẫn</a><br>';
+            html += '<input type="text" name="jform[type_desc]" id="input_type_desc" class="form-control" required placeholder="Tên skype"/>';
             
         }
         $('#type_desc').html(html);
     });
+    $('#type').trigger('change');
 
 });
+
+function show_skype_form(){
+    var popup = '';
+            popup += '<div class="row">';
+            popup += '<div class="col-md-6"><img class="avatar" src="'+fvn_url+'assets/images/skype-buoc1.jpg"/></div>';
+            popup += '<div class="col-md-6"><img class="avatar" src="'+fvn_url+'assets/images/skype-buoc2.jpg"/></div>';
+            popup += '</div>';
+    jAlert(popup)
+
+}
     function submitForm() {
         var form = jQuery("#frontForm");
         //var validator = form.validate();
         if (1) { //form.valid()){
-            if (jQuery("input[name='pay_method']").is(":checked") == false) {
-                alert("<?php echo __('Please choose a payment method') ?>");
-                return false;
-            }
+            // if (jQuery("input[name='pay_method']").is(":checked") == false) {
+            //     alert("<?php echo __('Please choose a payment method') ?>");
+            //     return false;
+            // }
 
             //form.submit();
             displayProcessingForm(1);
@@ -193,4 +200,5 @@ jQuery(document).ready(function($){
         }
     }
 </script>
+<style>.fvn-popup{width:90%}</style>
 <?php get_footer(); ?> 
