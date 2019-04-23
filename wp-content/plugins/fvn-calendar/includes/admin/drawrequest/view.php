@@ -6,7 +6,7 @@ class FvnAdminViewDrawRequest extends FvnAdminView{
 	
 	public function display($tpl=null){
 		FvnImporter::model('orders');
-		$this->items = (new FvnModelOrders())->getBookedCalendar();
+		$this->items = (new FvnModelOrders())->getBooked();
 		parent::display($tpl);
 	}
 	

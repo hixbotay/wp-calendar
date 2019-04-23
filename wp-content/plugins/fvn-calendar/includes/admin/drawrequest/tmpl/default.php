@@ -51,14 +51,14 @@ FvnImporter::helper('currency');
 							<td><?php echo $item->name;?></td>
 							<td><?php echo $item->phone;?></td>
 							<td><?php echo FvnParamVideoCallType::getDisplay($item->type).' <br><pre style="font-size:10px">'.$item->type_desc.'</pre>';?></td>
-							<td><?php FvnParamGender::getDisplay($item->gender);?></td>
+							<td><?php echo FvnParamGender::getDisplay($item->gender);?></td>
 							<td><?php echo $item->notes;?></td>							
 						</tr>
 					<?php }?>
 				</tbody>
 			</table>
 			<input type="hidden" name="page" value="<?php echo $this->input->get('page')?>"/>
-			<?php echo $this->pagination->getListFooter()?>
+			<?php //echo $this->pagination->getListFooter()?>
 			
 		
 	</div>

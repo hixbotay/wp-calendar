@@ -121,11 +121,14 @@ class FvnActionPayment extends FvnAction{
 		}		
 		do_action('hb_order_process_execute_after',$results);
 		// die;
+		/*
 		if($results->order_status==FvnParamOrderStatus::CONFIRMED['value']){
 			wp_redirect(FvnHelper::get_order_link($results));
 		}else{			
 			wp_redirect('index.php?view=message');
 		}		
+		*/
+		wp_redirect(FvnHelper::get_order_link($results));
 		exit;
 	}	
 	private function sendMail($order_id){	
